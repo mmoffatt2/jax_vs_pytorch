@@ -1,0 +1,13 @@
+{
+    "models": [
+        {"name": "microsoft/beit-base-patch16-224"},
+        {"name": "facebook/resnet50"},
+        {"name": "facebook/regnetY-400MF"},
+        {"name": "openai/clip-vit-base-patch32"},
+        {"name": "facebook/dino-vit-base"},
+        {"name": "google/vit-base-patch16-224"},
+        {"name": "microsoft/vision-encoder-decoder-base"},
+        {"name": "microsoft/vision-text-dual-encoder-base"},
+        {"name": "facebook/xlm-v-base"}
+    ]
+}
