@@ -1,0 +1,130 @@
+[
+    {
+        "gpt2": {
+            "pytorch_torch_compile_inductor": {
+                "inference_time": 0.02823944330215454,
+                "training_time": 0.23020887851715088
+            },
+            "pytorch_torch_compile_eager": {
+                "inference_time": 0.03309849262237549,
+                "training_time": 0.22442787647247314
+            },
+            "pytorch_torch_compile_cudagraphs": {
+                "inference_time": 0.05613441228866577,
+                "training_time": 0.18284579515457153
+            },
+            "pytorch_torch_compile_onnxrt": {
+                "inference_time": 0.03663129568099976,
+                "training_time": 0.23027436971664428
+            },
+            "pytorch_torch_compile_openxla": {
+                "inference_time": 0.03829028844833374,
+                "training_time": 0.22553026914596558
+            },
+            "pytorch_torch_compile_tvm": {
+                "inference_time": 0.03665193796157837,
+                "training_time": 0.1736262011528015
+            },
+            "jax_flax_xla": {
+                "inference_time": 0.008489534854888917,
+                "training_time": 0.028393008708953858
+            }
+        }
+    },
+    {
+        "albert-base-v2": {
+            "pytorch_torch_compile_inductor": {
+                "inference_time": 0.03198609828948975,
+                "training_time": 0.1563881015777588
+            },
+            "pytorch_torch_compile_eager": {
+                "inference_time": 0.03956714868545532,
+                "training_time": 0.19190894842147826
+            },
+            "pytorch_torch_compile_cudagraphs": {
+                "inference_time": 0.06116137742996216,
+                "training_time": 0.20810595989227296
+            },
+            "pytorch_torch_compile_onnxrt": {
+                "inference_time": 0.046120474338531496,
+                "training_time": 0.16314612865447997
+            },
+            "pytorch_torch_compile_openxla": {
+                "inference_time": 0.08262184858322144,
+                "training_time": 0.1836939573287964
+            },
+            "pytorch_torch_compile_tvm": {
+                "inference_time": 0.04352026700973511,
+                "training_time": 0.20242125988006593
+            },
+            "jax_flax_xla": {
+                "inference_time": 0.008889658451080322,
+                "training_time": 0.02654660701751709
+            }
+        }
+    },
+    {
+        "facebook/bart-large": {
+            "pytorch_torch_compile_inductor": {
+                "inference_time": 0.16701652765274047,
+                "training_time": 0.8224655270576477
+            },
+            "pytorch_torch_compile_eager": {
+                "inference_time": 0.16061246633529663,
+                "training_time": 0.8721489977836608
+            },
+            "pytorch_torch_compile_cudagraphs": {
+                "inference_time": 0.24878318071365357,
+                "training_time": 0.8329783821105957
+            },
+            "pytorch_torch_compile_onnxrt": {
+                "inference_time": 0.15765374422073364,
+                "training_time": 0.9095185470581054
+            },
+            "pytorch_torch_compile_openxla": {
+                "inference_time": 0.19736893892288207,
+                "training_time": 0.7994361662864685
+            },
+            "pytorch_torch_compile_tvm": {
+                "inference_time": 0.20011860132217407,
+                "training_time": 15.142164640426635
+            },
+            "jax_flax_xla": {
+                "inference_time": 0.009066910743713378,
+                "training_time": 0.030511436462402345
+            }
+        }
+    },
+    {
+        "bert-base-uncased": {
+            "pytorch_torch_compile_inductor": {
+                "inference_time": 0.042663938999176025,
+                "training_time": 0.2047167444229126
+            },
+            "pytorch_torch_compile_eager": {
+                "inference_time": 0.03769912958145141,
+                "training_time": 0.19050441980361937
+            },
+            "pytorch_torch_compile_cudagraphs": {
+                "inference_time": 0.05879849195480347,
+                "training_time": 0.23093618631362914
+            },
+            "pytorch_torch_compile_onnxrt": {
+                "inference_time": 0.044503374099731444,
+                "training_time": 0.22914262771606445
+            },
+            "pytorch_torch_compile_openxla": {
+                "inference_time": 0.04522393465042114,
+                "training_time": 0.19946424961090087
+            },
+            "pytorch_torch_compile_tvm": {
+                "inference_time": 0.0730019235610962,
+                "training_time": 0.21000107526779174
+            },
+            "jax_flax_xla": {
+                "inference_time": 0.007909862995147706,
+                "training_time": 0.027277185916900634
+            }
+        }
+    }
+]

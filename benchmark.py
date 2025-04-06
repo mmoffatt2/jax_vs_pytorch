@@ -1,3 +1,4 @@
+import os
 import json
 import time
 import torch
@@ -5,6 +6,32 @@ from transformers import AutoModel, AutoTokenizer, FlaxAutoModel
 import torch_xla.core.xla_model as xm  # for PyTorch XLA
 import jax
 import jax.numpy as jnp
+
+# Run beforehand:
+# export GPU_NUM_DEVICES=1
+# export XLA_USE_CUDA=1
+# export PJRT_DEVICE=cuda
+
+def append_results(new_results, output_file="bench_results.json"):
+    # Check if the file exists and load its data, else start with an empty list.
+    if os.path.exists(output_file):
+        try:
+            with open(output_file, "r") as f:
+                data = json.load(f)
+        except json.JSONDecodeError:
+            # If the file is empty or invalid, start fresh.
+            data = []
+    else:
+        data = []
+    
+    # Append new results. Depending on your design, you can append the entire results
+    # or just the current model's result. Here, we're assuming new_results is a dict.
+    data.append(new_results)
+    
+    # Write back the updated list to the file.
+    with open(output_file, "w") as f:
+        json.dump(data, f, indent=4)
+    print(f"Results successfully appended to {output_file}")
 
 # Define helper functions for creating dummy inputs.
 # Here, we simply tokenize a fixed string; in practice you might generate random inputs
@@ -118,21 +145,29 @@ def benchmark_inference_flax(model, inputs, num_iters=100):
 
 # Training benchmark for JAX/Flax (simplified example)
 def benchmark_training_flax(model, inputs, num_iters=100):
-    # For training, we define a loss function and compute gradients.
-    def loss_fn(params, batch):
-        outputs = model(**batch, params=params, train=True)[0]
-        # Dummy target: same shape as outputs
+    # Update loss_fn to accept dropout_rng and pass it to the model.
+    def loss_fn(params, batch, dropout_rng):
+        # Pass dropout_rng to the model call for training mode.
+        outputs = model(**batch, params=params, train=True, dropout_rng=dropout_rng)[0]
+        # Dummy target with the same shape as outputs.
         dummy_target = jnp.zeros_like(outputs)
         return jnp.mean((outputs - dummy_target) ** 2)
+
+    # JIT compile the loss function and its gradient.
     grad_fn = jax.jit(jax.value_and_grad(loss_fn))
     params = model.params
     inputs_np = {k: v.cpu().numpy() for k, v in inputs.items()}
-    # Warm-up
+    rng = jax.random.PRNGKey(0)
+    
+    # Warm-up iterations.
     for _ in range(10):
-        loss, grads = grad_fn(params, inputs_np)
+        rng, dropout_rng = jax.random.split(rng)
+        loss, grads = grad_fn(params, inputs_np, dropout_rng)
+    
     start = time.time()
     for _ in range(num_iters):
-        loss, grads = grad_fn(params, inputs_np)
+        rng, dropout_rng = jax.random.split(rng)
+        loss, grads = grad_fn(params, inputs_np, dropout_rng)
     end = time.time()
     return (end - start) / num_iters
 
@@ -153,24 +188,31 @@ def run_benchmarks(json_path):
         dummy_inputs = get_dummy_inputs(tokenizer)
         
         # --- PyTorch with torch.compile ---
-        model_pt = AutoModel.from_pretrained(model_name)
-        model_pt.eval()
-        compiled_model = torch.compile(model_pt)
-        inf_time = benchmark_inference_torch_compile(compiled_model, dummy_inputs)
-        train_time = benchmark_training_torch_compile(compiled_model, dummy_inputs)
-        results[model_name]["pytorch_torch_compile"] = {"inference_time": inf_time,
-                                                        "training_time": train_time}
+        backends = torch._dynamo.list_backends()
+        print("Available backends:", backends)
+        backends = ["inductor", "eager", 'cudagraphs', 'onnxrt', 'openxla', 'tvm']
+        for backend in backends:
+            model_pt = AutoModel.from_pretrained(model_name)
+            model_pt.eval()
+            compiled_model = torch.compile(model_pt, backend=backend)
+            inf_time = benchmark_inference_torch_compile(compiled_model, dummy_inputs)
+            train_time = benchmark_training_torch_compile(compiled_model, dummy_inputs)
+            results[model_name][f"pytorch_torch_compile_{backend}"] = {"inference_time": inf_time,
+                                                            "training_time": train_time}
         
-        # --- PyTorch with XLA ---
-        # Note: Ensure you have an XLA-supported device (e.g. TPU or a GPU configured with torch_xla)
-        device = xm.xla_device()
-        model_xla = AutoModel.from_pretrained(model_name).to(device)
-        model_xla.eval()
-        dummy_inputs_xla = get_dummy_inputs(tokenizer, device=device)
-        inf_time_xla = benchmark_inference_torch_xla(model_xla, dummy_inputs_xla)
-        train_time_xla = benchmark_training_torch_xla(model_xla, dummy_inputs_xla)
-        results[model_name]["pytorch_xla"] = {"inference_time": inf_time_xla,
-                                              "training_time": train_time_xla}
+        # # --- PyTorch with XLA ---
+        # # Note: Ensure you have an XLA-supported device (e.g. TPU or a GPU configured with torch_xla)
+        # device = xm.xla_device()
+        # attr = attr.to(torch.device(device))
+        # model_xla = AutoModel.from_pretrained(model_name).to(device)
+        # model_xla.eval()
+        # dummy_inputs_xla = get_dummy_inputs(tokenizer, device=device)
+        # inf_time_xla = benchmark_inference_torch_xla(model_xla, dummy_inputs_xla)
+        # train_time_xla = benchmark_training_torch_xla(model_xla, dummy_inputs_xla)
+        # results[model_name]["pytorch_xla"] = {"inference_time": inf_time_xla,
+        #                                       "training_time": train_time_xla}
+
+
         
         # --- JAX/Flax with XLA ---
         model_flax = FlaxAutoModel.from_pretrained(model_name)
@@ -179,6 +221,9 @@ def run_benchmarks(json_path):
         results[model_name]["jax_flax_xla"] = {"inference_time": inf_time_flax,
                                                "training_time": train_time_flax}
         print(f"Results for {model_name}: {results[model_name]}")
+
+        # Append the current model's results to the JSON file.
+        append_results({model_name: results[model_name]})
     
     return results
 
