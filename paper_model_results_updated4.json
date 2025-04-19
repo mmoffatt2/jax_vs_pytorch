@@ -1,0 +1,1368 @@
+[
+    {
+        "AlbertForMaskedLM": {
+            "pytorch_torch_compile_inductor": {
+                "inference_s": 0.021100466251373292,
+                "training_s": 0.061902382373809815
+            },
+            "pytorch_torch_compile_eager": {
+                "inference_s": 0.024616193771362305,
+                "training_s": 0.08525827407836914
+            },
+            "pytorch_torch_compile_cudagraphs": {
+                "inference_s": 0.04821393251419068,
+                "training_s": 0.12888015508651735
+            },
+            "pytorch_torch_compile_onnxrt": {
+                "inference_s": 0.028959681987762453,
+                "training_s": 0.12833453178405763
+            },
+            "pytorch_torch_compile_openxla": {
+                "inference_s": 0.028580038547515868,
+                "training_s": 0.08937520503997803
+            },
+            "pytorch_torch_compile_tvm": {
+                "inference_s": 0.02840841770172119,
+                "training_s": 0.08892325639724731
+            },
+            "jax_flax_xla": {
+                "inference_s": 0.0007437586784362793,
+                "training_s": 0.002564246654510498
+            }
+        }
+    },
+    {
+        "AlbertForQuestionAnswering": {
+            "pytorch_torch_compile_inductor": {
+                "inference_s": 0.015715312957763673,
+                "training_s": 0.05026669263839722
+            },
+            "pytorch_torch_compile_eager": {
+                "inference_s": 0.022517130374908448,
+                "training_s": 0.08483960628509521
+            },
+            "pytorch_torch_compile_cudagraphs": {
+                "inference_s": 0.048532476425170896,
+                "training_s": 0.1225699782371521
+            },
+            "pytorch_torch_compile_onnxrt": {
+                "inference_s": 0.024739091396331788,
+                "training_s": 0.10671566724777222
+            },
+            "pytorch_torch_compile_openxla": {
+                "inference_s": 0.02663666009902954,
+                "training_s": 0.08497506618499756
+            },
+            "pytorch_torch_compile_tvm": {
+                "inference_s": 0.029220511913299562,
+                "training_s": 0.08518055438995362
+            },
+            "jax_flax_xla": {
+                "inference_s": 0.0007474374771118164,
+                "training_s": 0.0026793694496154786
+            }
+        }
+    },
+    {
+        "AllenaiLongformerBase": {
+            "pytorch_torch_compile_inductor": {
+                "inference_s": 0.30670461893081663,
+                "training_s": 1.1909909057617187
+            },
+            "pytorch_torch_compile_eager": {
+                "inference_s": 0.3607925844192505,
+                "training_s": 1.28913907289505
+            },
+            "pytorch_torch_compile_cudagraphs": {
+                "inference_s": 0.773241994380951,
+                "training_s": 1.9166420817375183
+            },
+            "pytorch_torch_compile_onnxrt": {
+                "inference_s": 3.551206374168396,
+                "training_s": 10.2787002825737
+            },
+            "pytorch_torch_compile_openxla": {
+                "error": "torch_xla/csrc/runtime/pjrt_registry.cc:214 : Check failed: client \n*** Begin stack trace ***\n\ttsl::CurrentStackTrace()\n\ttorch_xla::runtime::InitializePjRt(std::string const&)\n\ttorch_xla::runtime::PjRtComputationClient::PjRtComputationClient()\n\t\n\ttorch_xla::runtime::GetComputationClient()\n\ttorch_xla::bridge::GetDefaultDevice()\n\ttorch_xla::bridge::GetCurrentDevice()\n\ttorch_xla::bridge::GetCurrentAtenDevice()\n\t\n\t\n\t\n\t_PyObject_MakeTpCall\n\t_PyEval_EvalFrameDefault\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t\n\t\n\tPyObject_Call\n\t_PyEval_EvalFrameDefault\n\t\n\t\n\tPyObject_Call\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyObject_FastCallDictTstate\n\t_PyObject_Call_Prepend\n\t\n\t_PyObject_MakeTpCall\n\t_PyEval_EvalFrameDefault\n\t\n\t\n\t\n\tPyObject_Call\n\t_PyEval_EvalFrameDefault\n\t\n\t\n\tPyObject_Call\n\t_PyEval_EvalFrameDefault\n\t\n\t\n\tPyObject_Call\n\t_PyEval_EvalFrameDefault\n\t_PyFunction_Vectorcall\n\tPyObject_Call\n\t_PyEval_EvalFrameDefault\n\t\n\tPyObject_Call\n\t_PyEval_EvalFrameDefault\n\t_PyFunction_Vectorcall\n\t_PyObject_FastCallDictTstate\n\t_PyObject_Call_Prepend\n\t\n\tPyObject_Call\n\t_PyEval_EvalFrameDefault\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\tPyEval_EvalCode\n\t\n\t\n\t\n\t_PyRun_SimpleFileObject\n\t_PyRun_AnyFileObject\n\tPy_RunMain\n\tPy_BytesMain\n\t__libc_start_main\n\t\n*** End stack trace ***\nUnknown PJRT_DEVICE 'CUDA'"
+            },
+            "pytorch_torch_compile_tvm": {
+                "inference_s": 0.3801512861251831,
+                "training_s": 1.2937897491455077
+            },
+            "jax_flax_xla": {
+                "error": "Unrecognized configuration class <class 'transformers.models.longformer.configuration_longformer.LongformerConfig'> for this kind of AutoModel: FlaxAutoModel.\nModel type should be one of AlbertConfig, BartConfig, BeitConfig, BertConfig, BigBirdConfig, BlenderbotConfig, BlenderbotSmallConfig, BloomConfig, CLIPConfig, Dinov2Config, DistilBertConfig, ElectraConfig, GemmaConfig, GPT2Config, GPT2Config, GPTNeoConfig, GPTJConfig, LlamaConfig, LongT5Config, MarianConfig, MBartConfig, MistralConfig, MT5Config, OPTConfig, PegasusConfig, RegNetConfig, ResNetConfig, RobertaConfig, RobertaPreLayerNormConfig, RoFormerConfig, T5Config, VisionTextDualEncoderConfig, ViTConfig, Wav2Vec2Config, WhisperConfig, XGLMConfig, XLMRobertaConfig."
+            }
+        }
+    },
+    {
+        "BartForCausalLM": {
+            "pytorch_torch_compile_inductor": {
+                "inference_s": 0.049907243251800536,
+                "training_s": 0.22308647155761718
+            },
+            "pytorch_torch_compile_eager": {
+                "inference_s": 0.061008107662200925,
+                "training_s": 0.22945211410522462
+            },
+            "pytorch_torch_compile_cudagraphs": {
+                "inference_s": 0.0915701699256897,
+                "training_s": 0.27514387130737306
+            },
+            "pytorch_torch_compile_onnxrt": {
+                "inference_s": 0.20790636539459229,
+                "training_s": 0.4427159261703491
+            },
+            "pytorch_torch_compile_openxla": {
+                "inference_s": 0.062346968650817874,
+                "training_s": 0.2291019105911255
+            },
+            "pytorch_torch_compile_tvm": {
+                "inference_s": 0.0617411994934082,
+                "training_s": 0.23290417909622194
+            },
+            "jax_flax_xla": {
+                "inference_s": 0.001906111240386963,
+                "training_s": 0.00865433931350708
+            }
+        }
+    },
+    {
+        "BartForConditionalGeneration": {
+            "pytorch_torch_compile_inductor": {
+                "inference_s": 0.09804497718811035,
+                "training_s": 0.47864279508590696
+            },
+            "pytorch_torch_compile_eager": {
+                "inference_s": 0.12513136386871337,
+                "training_s": 0.5387560677528381
+            },
+            "pytorch_torch_compile_cudagraphs": {
+                "inference_s": 0.1537837266921997,
+                "training_s": 0.5769260239601135
+            },
+            "pytorch_torch_compile_onnxrt": {
+                "error": "backend='onnxrt' raised:\nAssertionError: Please convert all Tensors to FakeTensors first or instantiate FakeTensorMode with 'allow_non_fake_inputs'. Found in aten.alias.default(tensor(2, size=()))\n\nWhile executing %setitem_1 : [num_users=0] = call_function[target=operator.setitem](args = (%shifted_input_ids, (slice(None, None, None), 0), 2), kwargs = {})\nOriginal traceback:\n  File \"/opt/conda/envs/xla-env/lib/python3.10/site-packages/transformers/models/bart/modeling_bart.py\", line 1655, in forward\n    outputs = self.model(\n  File \"/opt/conda/envs/xla-env/lib/python3.10/site-packages/transformers/models/bart/modeling_bart.py\", line 1504, in forward\n    decoder_input_ids = shift_tokens_right(\n  File \"/opt/conda/envs/xla-env/lib/python3.10/site-packages/transformers/models/bart/modeling_bart.py\", line 87, in shift_tokens_right\n    shifted_input_ids[:, 0] = decoder_start_token_id\n\n\nSet TORCH_LOGS=\"+dynamo\" and TORCHDYNAMO_VERBOSE=1 for more information\n\n\nYou can suppress this exception and fall back to eager by setting:\n    import torch._dynamo\n    torch._dynamo.config.suppress_errors = True\n"
+            },
+            "pytorch_torch_compile_openxla": {
+                "inference_s": 0.12295098781585694,
+                "training_s": 0.5385088610649109
+            },
+            "pytorch_torch_compile_tvm": {
+                "inference_s": 0.12279985189437866,
+                "training_s": 0.5383733010292053
+            },
+            "jax_flax_xla": {
+                "inference_s": 0.0022248578071594237,
+                "training_s": 0.007985684871673584
+            }
+        }
+    },
+    {
+        "BertForMaskedLM": {
+            "pytorch_torch_compile_inductor": {
+                "inference_s": 0.029893267154693603,
+                "training_s": 0.10914779663085937
+            },
+            "pytorch_torch_compile_eager": {
+                "inference_s": 0.035263431072235105,
+                "training_s": 0.11940330743789673
+            },
+            "pytorch_torch_compile_cudagraphs": {
+                "inference_s": 0.06131981611251831,
+                "training_s": 0.15159297704696656
+            },
+            "pytorch_torch_compile_onnxrt": {
+                "inference_s": 0.1243315577507019,
+                "training_s": 0.25059462547302247
+            },
+            "pytorch_torch_compile_openxla": {
+                "inference_s": 0.04026915073394775,
+                "training_s": 0.1264740514755249
+            },
+            "pytorch_torch_compile_tvm": {
+                "inference_s": 0.04089537620544434,
+                "training_s": 0.1333151388168335
+            },
+            "jax_flax_xla": {
+                "inference_s": 0.0008049297332763672,
+                "training_s": 0.004240846633911133
+            }
+        }
+    },
+    {
+        "BertForQuestionAnswering": {
+            "pytorch_torch_compile_inductor": {
+                "inference_s": 0.022814204692840578,
+                "training_s": 0.0927875804901123
+            },
+            "pytorch_torch_compile_eager": {
+                "inference_s": 0.029385123252868652,
+                "training_s": 0.10736689567565919
+            },
+            "pytorch_torch_compile_cudagraphs": {
+                "inference_s": 0.055239810943603515,
+                "training_s": 0.14156921625137328
+            },
+            "pytorch_torch_compile_onnxrt": {
+                "inference_s": 0.09625702142715455,
+                "training_s": 0.18707181692123412
+            },
+            "pytorch_torch_compile_openxla": {
+                "inference_s": 0.03362046718597412,
+                "training_s": 0.11213145494461059
+            },
+            "pytorch_torch_compile_tvm": {
+                "inference_s": 0.03372425556182861,
+                "training_s": 0.11167156457901001
+            },
+            "jax_flax_xla": {
+                "inference_s": 0.0007921814918518067,
+                "training_s": 0.004440436363220215
+            }
+        }
+    },
+    {
+        "BigBird": {
+            "pytorch_torch_compile_inductor": {
+                "inference_s": 0.033681397438049314,
+                "training_s": 0.19432084798812865
+            },
+            "pytorch_torch_compile_eager": {
+                "inference_s": 0.040601518154144284,
+                "training_s": 0.1925595498085022
+            },
+            "pytorch_torch_compile_cudagraphs": {
+                "inference_s": 0.0690289831161499,
+                "training_s": 0.22317550659179688
+            },
+            "pytorch_torch_compile_onnxrt": {
+                "inference_s": 0.35567219495773317,
+                "training_s": 0.763629503250122
+            },
+            "pytorch_torch_compile_openxla": {
+                "inference_s": 0.04646574974060059,
+                "training_s": 0.15757113695144653
+            },
+            "pytorch_torch_compile_tvm": {
+                "inference_s": 0.04685439109802246,
+                "training_s": 0.160214102268219
+            },
+            "jax_flax_xla": {
+                "error": "Sequence length must be multiple of block size, but sequence length is 12, while block size is 64."
+            }
+        }
+    },
+    {
+        "BlenderbotForCausalLM": {
+            "pytorch_torch_compile_inductor": {
+                "inference_s": 0.07039751768112183,
+                "training_s": 0.2655063271522522
+            },
+            "pytorch_torch_compile_eager": {
+                "inference_s": 0.08371442556381226,
+                "training_s": 0.2345528507232666
+            },
+            "pytorch_torch_compile_cudagraphs": {
+                "inference_s": 0.11619025468826294,
+                "training_s": 0.28292778730392454
+            },
+            "pytorch_torch_compile_onnxrt": {
+                "inference_s": 0.26532081127166746,
+                "training_s": 0.5178327369689941
+            },
+            "pytorch_torch_compile_openxla": {
+                "inference_s": 0.0838738465309143,
+                "training_s": 0.24598398208618164
+            },
+            "pytorch_torch_compile_tvm": {
+                "inference_s": 0.08566758632659913,
+                "training_s": 0.24059807538986205
+            },
+            "jax_flax_xla": {
+                "inference_s": 0.0016313719749450684,
+                "training_s": 0.006185884475708008
+            }
+        }
+    },
+    {
+        "BlenderbotSmallForCausalLM": {
+            "pytorch_torch_compile_inductor": {
+                "inference_s": 0.01624600648880005,
+                "training_s": 0.07349587202072144
+            },
+            "pytorch_torch_compile_eager": {
+                "inference_s": 0.02271538019180298,
+                "training_s": 0.08350432634353638
+            },
+            "pytorch_torch_compile_cudagraphs": {
+                "inference_s": 0.040918357372283935,
+                "training_s": 0.1065909743309021
+            },
+            "pytorch_torch_compile_onnxrt": {
+                "inference_s": 0.07826354026794434,
+                "training_s": 0.17006351947784423
+            },
+            "pytorch_torch_compile_openxla": {
+                "inference_s": 0.022514171600341797,
+                "training_s": 0.08849172115325928
+            },
+            "pytorch_torch_compile_tvm": {
+                "inference_s": 0.02254645586013794,
+                "training_s": 0.08801054000854493
+            },
+            "jax_flax_xla": {
+                "inference_s": 0.0011029362678527832,
+                "training_s": 0.006510429382324219
+            }
+        }
+    },
+    {
+        "BlenderbotSmallForConditionalGeneration": {
+            "pytorch_torch_compile_inductor": {
+                "inference_s": 0.02744128704071045,
+                "training_s": 0.18075281381607056
+            },
+            "pytorch_torch_compile_eager": {
+                "inference_s": 0.042872228622436524,
+                "training_s": 0.18041650533676148
+            },
+            "pytorch_torch_compile_cudagraphs": {
+                "inference_s": 0.08838886499404908,
+                "training_s": 0.23944429874420167
+            },
+            "pytorch_torch_compile_onnxrt": {
+                "inference_s": 0.12671951532363893,
+                "training_s": 0.28417110919952393
+            },
+            "pytorch_torch_compile_openxla": {
+                "inference_s": 0.042681057453155515,
+                "training_s": 0.18600024461746215
+            },
+            "pytorch_torch_compile_tvm": {
+                "inference_s": 0.04320469617843628,
+                "training_s": 0.1852393341064453
+            },
+            "jax_flax_xla": {
+                "inference_s": 0.0011750197410583497,
+                "training_s": 0.006331441402435303
+            }
+        }
+    },
+    {
+        "CamemBert": {
+            "pytorch_torch_compile_inductor": {
+                "inference_s": 0.027831311225891112,
+                "training_s": 0.10261031150817872
+            },
+            "pytorch_torch_compile_eager": {
+                "inference_s": 0.03201932907104492,
+                "training_s": 0.10712735414505005
+            },
+            "pytorch_torch_compile_cudagraphs": {
+                "inference_s": 0.06258674383163453,
+                "training_s": 0.1375955295562744
+            },
+            "pytorch_torch_compile_onnxrt": {
+                "inference_s": 0.09997310400009156,
+                "training_s": 0.1980069351196289
+            },
+            "pytorch_torch_compile_openxla": {
+                "inference_s": 0.03792635917663574,
+                "training_s": 0.142994441986084
+            },
+            "pytorch_torch_compile_tvm": {
+                "inference_s": 0.03809902906417847,
+                "training_s": 0.1461581015586853
+            },
+            "jax_flax_xla": {
+                "error": "Unrecognized configuration class <class 'transformers.models.camembert.configuration_camembert.CamembertConfig'> for this kind of AutoModel: FlaxAutoModel.\nModel type should be one of AlbertConfig, BartConfig, BeitConfig, BertConfig, BigBirdConfig, BlenderbotConfig, BlenderbotSmallConfig, BloomConfig, CLIPConfig, Dinov2Config, DistilBertConfig, ElectraConfig, GemmaConfig, GPT2Config, GPT2Config, GPTNeoConfig, GPTJConfig, LlamaConfig, LongT5Config, MarianConfig, MBartConfig, MistralConfig, MT5Config, OPTConfig, PegasusConfig, RegNetConfig, ResNetConfig, RobertaConfig, RobertaPreLayerNormConfig, RoFormerConfig, T5Config, VisionTextDualEncoderConfig, ViTConfig, Wav2Vec2Config, WhisperConfig, XGLMConfig, XLMRobertaConfig."
+            }
+        }
+    },
+    {
+        "DebertaForMaskedLM": {
+            "pytorch_torch_compile_inductor": {
+                "inference_s": 0.07133142948150635,
+                "training_s": 0.2740667414665222
+            },
+            "pytorch_torch_compile_eager": {
+                "inference_s": 0.07779613256454468,
+                "training_s": 0.2463206434249878
+            },
+            "pytorch_torch_compile_cudagraphs": {
+                "inference_s": 0.14131004095077515,
+                "training_s": 0.3326647186279297
+            },
+            "pytorch_torch_compile_onnxrt": {
+                "error": "backend='onnxrt' raised:\nAssertionError: Please convert all Tensors to FakeTensors first or instantiate FakeTensorMode with 'allow_non_fake_inputs'. Found in aten.alias.default(tensor(64., size=()))\n\nWhile executing %tensor : [num_users=1] = call_function[target=torch.tensor](args = (64,), kwargs = {dtype: torch.float32})\nOriginal traceback:\n  File \"/opt/conda/envs/xla-env/lib/python3.10/site-packages/transformers/models/deberta/modeling_deberta.py\", line 274, in forward\n    scale = scaled_size_sqrt(query_layer, scale_factor)\n  File \"/opt/conda/envs/xla-env/lib/python3.10/site-packages/torch/_dynamo/polyfills/__init__.py\", line 160, in getattr_and_trace\n    return fn(*args[2:], **kwargs)\n  File \"/opt/conda/envs/xla-env/lib/python3.10/site-packages/transformers/models/deberta/modeling_deberta.py\", line 137, in scaled_size_sqrt\n    return torch.sqrt(torch.tensor(query_layer.size(-1), dtype=torch.float) * scale_factor)\n\n\nSet TORCH_LOGS=\"+dynamo\" and TORCHDYNAMO_VERBOSE=1 for more information\n\n\nYou can suppress this exception and fall back to eager by setting:\n    import torch._dynamo\n    torch._dynamo.config.suppress_errors = True\n"
+            },
+            "pytorch_torch_compile_openxla": {
+                "error": "torch_xla/csrc/runtime/pjrt_registry.cc:214 : Check failed: client \n*** Begin stack trace ***\n\ttsl::CurrentStackTrace()\n\ttorch_xla::runtime::InitializePjRt(std::string const&)\n\ttorch_xla::runtime::PjRtComputationClient::PjRtComputationClient()\n\t\n\ttorch_xla::runtime::GetComputationClient()\n\ttorch_xla::bridge::GetDefaultDevice()\n\ttorch_xla::bridge::GetCurrentDevice()\n\ttorch_xla::bridge::GetCurrentAtenDevice()\n\t\n\t\n\t\n\t_PyObject_MakeTpCall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\tTHPFunction_apply(_object*, _object*)\n\t\n\tPyObject_Call\n\t_PyEval_EvalFrameDefault\n\t\n\t\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t\n\t\n\tPyObject_Call\n\t_PyEval_EvalFrameDefault\n\t\n\t\n\tPyObject_Call\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyObject_FastCallDictTstate\n\t_PyObject_Call_Prepend\n\t\n\t_PyObject_MakeTpCall\n\t_PyEval_EvalFrameDefault\n\t\n\t\n\t\n\tPyObject_Call\n\t_PyEval_EvalFrameDefault\n\t\n\t\n\tPyObject_Call\n\t_PyEval_EvalFrameDefault\n\t\n\t\n\tPyObject_Call\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\tPyObject_Call\n\t_PyEval_EvalFrameDefault\n\t\n\t\n\tPyObject_Call\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyObject_FastCallDictTstate\n\t_PyObject_Call_Prepend\n\t\n\tPyObject_Call\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\tPyEval_EvalCode\n\t\n\t\n\t\n\t_PyRun_SimpleFileObject\n\t_PyRun_AnyFileObject\n\tPy_RunMain\n\tPy_BytesMain\n\t__libc_start_main\n\t\n*** End stack trace ***\nUnknown PJRT_DEVICE 'CUDA'"
+            },
+            "pytorch_torch_compile_tvm": {
+                "inference_s": 0.07409691572189331,
+                "training_s": 0.24516931295394898
+            },
+            "jax_flax_xla": {
+                "error": "Unrecognized configuration class <class 'transformers.models.deberta.configuration_deberta.DebertaConfig'> for this kind of AutoModel: FlaxAutoModel.\nModel type should be one of AlbertConfig, BartConfig, BeitConfig, BertConfig, BigBirdConfig, BlenderbotConfig, BlenderbotSmallConfig, BloomConfig, CLIPConfig, Dinov2Config, DistilBertConfig, ElectraConfig, GemmaConfig, GPT2Config, GPT2Config, GPTNeoConfig, GPTJConfig, LlamaConfig, LongT5Config, MarianConfig, MBartConfig, MistralConfig, MT5Config, OPTConfig, PegasusConfig, RegNetConfig, ResNetConfig, RobertaConfig, RobertaPreLayerNormConfig, RoFormerConfig, T5Config, VisionTextDualEncoderConfig, ViTConfig, Wav2Vec2Config, WhisperConfig, XGLMConfig, XLMRobertaConfig."
+            }
+        }
+    },
+    {
+        "DebertaForQuestionAnswering": {
+            "pytorch_torch_compile_inductor": {
+                "inference_s": 0.06595691204071046,
+                "training_s": 0.2570645213127136
+            },
+            "pytorch_torch_compile_eager": {
+                "inference_s": 0.07275067567825318,
+                "training_s": 0.19019917249679566
+            },
+            "pytorch_torch_compile_cudagraphs": {
+                "inference_s": 0.13159679412841796,
+                "training_s": 0.28097004413604737
+            },
+            "pytorch_torch_compile_onnxrt": {
+                "error": "backend='onnxrt' raised:\nAssertionError: Please convert all Tensors to FakeTensors first or instantiate FakeTensorMode with 'allow_non_fake_inputs'. Found in aten.alias.default(tensor(64., size=()))\n\nWhile executing %tensor : [num_users=1] = call_function[target=torch.tensor](args = (64,), kwargs = {dtype: torch.float32})\nOriginal traceback:\n  File \"/opt/conda/envs/xla-env/lib/python3.10/site-packages/transformers/models/deberta/modeling_deberta.py\", line 274, in forward\n    scale = scaled_size_sqrt(query_layer, scale_factor)\n  File \"/opt/conda/envs/xla-env/lib/python3.10/site-packages/torch/_dynamo/polyfills/__init__.py\", line 160, in getattr_and_trace\n    return fn(*args[2:], **kwargs)\n  File \"/opt/conda/envs/xla-env/lib/python3.10/site-packages/transformers/models/deberta/modeling_deberta.py\", line 137, in scaled_size_sqrt\n    return torch.sqrt(torch.tensor(query_layer.size(-1), dtype=torch.float) * scale_factor)\n\n\nSet TORCH_LOGS=\"+dynamo\" and TORCHDYNAMO_VERBOSE=1 for more information\n\n\nYou can suppress this exception and fall back to eager by setting:\n    import torch._dynamo\n    torch._dynamo.config.suppress_errors = True\n"
+            },
+            "pytorch_torch_compile_openxla": {
+                "error": "torch_xla/csrc/runtime/pjrt_registry.cc:214 : Check failed: client \n*** Begin stack trace ***\n\ttsl::CurrentStackTrace()\n\ttorch_xla::runtime::InitializePjRt(std::string const&)\n\ttorch_xla::runtime::PjRtComputationClient::PjRtComputationClient()\n\t\n\ttorch_xla::runtime::GetComputationClient()\n\ttorch_xla::bridge::GetDefaultDevice()\n\ttorch_xla::bridge::GetCurrentDevice()\n\ttorch_xla::bridge::GetCurrentAtenDevice()\n\t\n\t\n\t\n\t_PyObject_MakeTpCall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\tTHPFunction_apply(_object*, _object*)\n\t\n\tPyObject_Call\n\t_PyEval_EvalFrameDefault\n\t\n\t\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t\n\t\n\tPyObject_Call\n\t_PyEval_EvalFrameDefault\n\t\n\t\n\tPyObject_Call\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyObject_FastCallDictTstate\n\t_PyObject_Call_Prepend\n\t\n\t_PyObject_MakeTpCall\n\t_PyEval_EvalFrameDefault\n\t\n\t\n\t\n\tPyObject_Call\n\t_PyEval_EvalFrameDefault\n\t\n\t\n\tPyObject_Call\n\t_PyEval_EvalFrameDefault\n\t\n\t\n\tPyObject_Call\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\tPyObject_Call\n\t_PyEval_EvalFrameDefault\n\t\n\t\n\tPyObject_Call\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyObject_FastCallDictTstate\n\t_PyObject_Call_Prepend\n\t\n\tPyObject_Call\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\tPyEval_EvalCode\n\t\n\t\n\t\n\t_PyRun_SimpleFileObject\n\t_PyRun_AnyFileObject\n\tPy_RunMain\n\tPy_BytesMain\n\t__libc_start_main\n\t\n*** End stack trace ***\nUnknown PJRT_DEVICE 'CUDA'"
+            },
+            "pytorch_torch_compile_tvm": {
+                "inference_s": 0.06400709867477417,
+                "training_s": 0.17686929941177368
+            },
+            "jax_flax_xla": {
+                "error": "Unrecognized configuration class <class 'transformers.models.deberta.configuration_deberta.DebertaConfig'> for this kind of AutoModel: FlaxAutoModel.\nModel type should be one of AlbertConfig, BartConfig, BeitConfig, BertConfig, BigBirdConfig, BlenderbotConfig, BlenderbotSmallConfig, BloomConfig, CLIPConfig, Dinov2Config, DistilBertConfig, ElectraConfig, GemmaConfig, GPT2Config, GPT2Config, GPTNeoConfig, GPTJConfig, LlamaConfig, LongT5Config, MarianConfig, MBartConfig, MistralConfig, MT5Config, OPTConfig, PegasusConfig, RegNetConfig, ResNetConfig, RobertaConfig, RobertaPreLayerNormConfig, RoFormerConfig, T5Config, VisionTextDualEncoderConfig, ViTConfig, Wav2Vec2Config, WhisperConfig, XGLMConfig, XLMRobertaConfig."
+            }
+        }
+    },
+    {
+        "DebertaV2ForMaskedLM": {
+            "pytorch_torch_compile_inductor": {
+                "error": "backend='inductor' raised:\nAssertionError: buf28\n\nSet TORCH_LOGS=\"+dynamo\" and TORCHDYNAMO_VERBOSE=1 for more information\n\n\nYou can suppress this exception and fall back to eager by setting:\n    import torch._dynamo\n    torch._dynamo.config.suppress_errors = True\n"
+            },
+            "pytorch_torch_compile_eager": {
+                "inference_s": 0.5444075989723206,
+                "training_s": 1.7965512871742249
+            },
+            "pytorch_torch_compile_cudagraphs": {
+                "inference_s": 0.628669068813324,
+                "training_s": 1.826754972934723
+            },
+            "pytorch_torch_compile_onnxrt": {
+                "error": "backend='onnxrt' raised:\nAssertionError: Please convert all Tensors to FakeTensors first or instantiate FakeTensorMode with 'allow_non_fake_inputs'. Found in aten.alias.default(tensor(127, size=()))\n\nWhile executing %tensor : [num_users=1] = call_function[target=torch.tensor](args = (127,), kwargs = {})\nOriginal traceback:\n  File \"/opt/conda/envs/xla-env/lib/python3.10/site-packages/transformers/models/deberta_v2/modeling_deberta_v2.py\", line 1059, in forward\n    outputs = self.deberta(\n  File \"/opt/conda/envs/xla-env/lib/python3.10/site-packages/transformers/models/deberta_v2/modeling_deberta_v2.py\", line 870, in forward\n    encoder_outputs = self.encoder(\n  File \"/opt/conda/envs/xla-env/lib/python3.10/site-packages/transformers/models/deberta_v2/modeling_deberta_v2.py\", line 655, in forward\n    relative_pos = self.get_rel_pos(hidden_states, query_states, relative_pos)\n  File \"/opt/conda/envs/xla-env/lib/python3.10/site-packages/transformers/models/deberta_v2/modeling_deberta_v2.py\", line 632, in get_rel_pos\n    relative_pos = build_relative_position(\n  File \"/opt/conda/envs/xla-env/lib/python3.10/site-packages/transformers/models/deberta_v2/modeling_deberta_v2.py\", line 103, in build_relative_position\n    rel_pos_ids = make_log_bucket_position(rel_pos_ids, bucket_size, max_position)\n  File \"/opt/conda/envs/xla-env/lib/python3.10/site-packages/torch/_dynamo/polyfills/__init__.py\", line 160, in getattr_and_trace\n    return fn(*args[2:], **kwargs)\n  File \"/opt/conda/envs/xla-env/lib/python3.10/site-packages/transformers/models/deberta_v2/modeling_deberta_v2.py\", line 68, in make_log_bucket_position\n    torch.tensor(mid - 1).type_as(relative_pos),\n\n\nSet TORCH_LOGS=\"+dynamo\" and TORCHDYNAMO_VERBOSE=1 for more information\n\n\nYou can suppress this exception and fall back to eager by setting:\n    import torch._dynamo\n    torch._dynamo.config.suppress_errors = True\n"
+            },
+            "pytorch_torch_compile_openxla": {
+                "error": "torch_xla/csrc/runtime/pjrt_registry.cc:214 : Check failed: client \n*** Begin stack trace ***\n\ttsl::CurrentStackTrace()\n\ttorch_xla::runtime::InitializePjRt(std::string const&)\n\ttorch_xla::runtime::PjRtComputationClient::PjRtComputationClient()\n\t\n\ttorch_xla::runtime::GetComputationClient()\n\ttorch_xla::bridge::GetDefaultDevice()\n\ttorch_xla::bridge::GetCurrentDevice()\n\ttorch_xla::bridge::GetCurrentAtenDevice()\n\t\n\t\n\t\n\t_PyObject_MakeTpCall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\tTHPFunction_apply(_object*, _object*)\n\t\n\tPyObject_Call\n\t_PyEval_EvalFrameDefault\n\t\n\t\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t\n\t\n\tPyObject_Call\n\t_PyEval_EvalFrameDefault\n\t\n\t\n\tPyObject_Call\n\t_PyEval_EvalFrameDefault\n\t\n\t\n\tPyObject_Call\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\tPyObject_Call\n\t_PyEval_EvalFrameDefault\n\t\n\t\n\tPyObject_Call\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyObject_FastCallDictTstate\n\t_PyObject_Call_Prepend\n\t\n\tPyObject_Call\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\tPyEval_EvalCode\n\t\n\t\n\t\n\t_PyRun_SimpleFileObject\n\t_PyRun_AnyFileObject\n\tPy_RunMain\n\tPy_BytesMain\n\t__libc_start_main\n\t\n*** End stack trace ***\nUnknown PJRT_DEVICE 'CUDA'"
+            },
+            "pytorch_torch_compile_tvm": {
+                "error": "backend='tvm' raised:\nModuleNotFoundError: No module named 'tvm'\n\nSet TORCH_LOGS=\"+dynamo\" and TORCHDYNAMO_VERBOSE=1 for more information\n\n\nYou can suppress this exception and fall back to eager by setting:\n    import torch._dynamo\n    torch._dynamo.config.suppress_errors = True\n"
+            },
+            "jax_flax_xla": {
+                "error": "Unrecognized configuration class <class 'transformers.models.deberta_v2.configuration_deberta_v2.DebertaV2Config'> for this kind of AutoModel: FlaxAutoModel.\nModel type should be one of AlbertConfig, BartConfig, BeitConfig, BertConfig, BigBirdConfig, BlenderbotConfig, BlenderbotSmallConfig, BloomConfig, CLIPConfig, Dinov2Config, DistilBertConfig, ElectraConfig, GemmaConfig, GPT2Config, GPT2Config, GPTNeoConfig, GPTJConfig, LlamaConfig, LongT5Config, MarianConfig, MBartConfig, MistralConfig, MT5Config, OPTConfig, PegasusConfig, RegNetConfig, ResNetConfig, RobertaConfig, RobertaPreLayerNormConfig, RoFormerConfig, T5Config, VisionTextDualEncoderConfig, ViTConfig, Wav2Vec2Config, WhisperConfig, XGLMConfig, XLMRobertaConfig."
+            }
+        }
+    },
+    {
+        "DebertaV2ForQuestionAnswering": {
+            "pytorch_torch_compile_inductor": {
+                "error": "backend='inductor' raised:\nAssertionError: buf28\n\nSet TORCH_LOGS=\"+dynamo\" and TORCHDYNAMO_VERBOSE=1 for more information\n\n\nYou can suppress this exception and fall back to eager by setting:\n    import torch._dynamo\n    torch._dynamo.config.suppress_errors = True\n"
+            },
+            "pytorch_torch_compile_eager": {
+                "inference_s": 0.4519592022895813,
+                "training_s": 1.3288793635368348
+            },
+            "pytorch_torch_compile_cudagraphs": {
+                "inference_s": 0.5509950470924377,
+                "training_s": 1.4734239983558655
+            },
+            "pytorch_torch_compile_onnxrt": {
+                "error": "backend='onnxrt' raised:\nAssertionError: Please convert all Tensors to FakeTensors first or instantiate FakeTensorMode with 'allow_non_fake_inputs'. Found in aten.alias.default(tensor(127, size=()))\n\nWhile executing %tensor : [num_users=1] = call_function[target=torch.tensor](args = (127,), kwargs = {})\nOriginal traceback:\n  File \"/opt/conda/envs/xla-env/lib/python3.10/site-packages/transformers/models/deberta_v2/modeling_deberta_v2.py\", line 1361, in forward\n    outputs = self.deberta(\n  File \"/opt/conda/envs/xla-env/lib/python3.10/site-packages/transformers/models/deberta_v2/modeling_deberta_v2.py\", line 870, in forward\n    encoder_outputs = self.encoder(\n  File \"/opt/conda/envs/xla-env/lib/python3.10/site-packages/transformers/models/deberta_v2/modeling_deberta_v2.py\", line 655, in forward\n    relative_pos = self.get_rel_pos(hidden_states, query_states, relative_pos)\n  File \"/opt/conda/envs/xla-env/lib/python3.10/site-packages/transformers/models/deberta_v2/modeling_deberta_v2.py\", line 632, in get_rel_pos\n    relative_pos = build_relative_position(\n  File \"/opt/conda/envs/xla-env/lib/python3.10/site-packages/transformers/models/deberta_v2/modeling_deberta_v2.py\", line 103, in build_relative_position\n    rel_pos_ids = make_log_bucket_position(rel_pos_ids, bucket_size, max_position)\n  File \"/opt/conda/envs/xla-env/lib/python3.10/site-packages/torch/_dynamo/polyfills/__init__.py\", line 160, in getattr_and_trace\n    return fn(*args[2:], **kwargs)\n  File \"/opt/conda/envs/xla-env/lib/python3.10/site-packages/transformers/models/deberta_v2/modeling_deberta_v2.py\", line 68, in make_log_bucket_position\n    torch.tensor(mid - 1).type_as(relative_pos),\n\n\nSet TORCH_LOGS=\"+dynamo\" and TORCHDYNAMO_VERBOSE=1 for more information\n\n\nYou can suppress this exception and fall back to eager by setting:\n    import torch._dynamo\n    torch._dynamo.config.suppress_errors = True\n"
+            },
+            "pytorch_torch_compile_openxla": {
+                "error": "torch_xla/csrc/runtime/pjrt_registry.cc:214 : Check failed: client \n*** Begin stack trace ***\n\ttsl::CurrentStackTrace()\n\ttorch_xla::runtime::InitializePjRt(std::string const&)\n\ttorch_xla::runtime::PjRtComputationClient::PjRtComputationClient()\n\t\n\ttorch_xla::runtime::GetComputationClient()\n\ttorch_xla::bridge::GetDefaultDevice()\n\ttorch_xla::bridge::GetCurrentDevice()\n\ttorch_xla::bridge::GetCurrentAtenDevice()\n\t\n\t\n\t\n\t_PyObject_MakeTpCall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\tTHPFunction_apply(_object*, _object*)\n\t\n\tPyObject_Call\n\t_PyEval_EvalFrameDefault\n\t\n\t\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t\n\t\n\tPyObject_Call\n\t_PyEval_EvalFrameDefault\n\t\n\t\n\tPyObject_Call\n\t_PyEval_EvalFrameDefault\n\t\n\t\n\tPyObject_Call\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\tPyObject_Call\n\t_PyEval_EvalFrameDefault\n\t\n\t\n\tPyObject_Call\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyObject_FastCallDictTstate\n\t_PyObject_Call_Prepend\n\t\n\tPyObject_Call\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\tPyEval_EvalCode\n\t\n\t\n\t\n\t_PyRun_SimpleFileObject\n\t_PyRun_AnyFileObject\n\tPy_RunMain\n\tPy_BytesMain\n\t__libc_start_main\n\t\n*** End stack trace ***\nUnknown PJRT_DEVICE 'CUDA'"
+            },
+            "pytorch_torch_compile_tvm": {
+                "error": "backend='tvm' raised:\nModuleNotFoundError: No module named 'tvm'\n\nSet TORCH_LOGS=\"+dynamo\" and TORCHDYNAMO_VERBOSE=1 for more information\n\n\nYou can suppress this exception and fall back to eager by setting:\n    import torch._dynamo\n    torch._dynamo.config.suppress_errors = True\n"
+            },
+            "jax_flax_xla": {
+                "error": "Unrecognized configuration class <class 'transformers.models.deberta_v2.configuration_deberta_v2.DebertaV2Config'> for this kind of AutoModel: FlaxAutoModel.\nModel type should be one of AlbertConfig, BartConfig, BeitConfig, BertConfig, BigBirdConfig, BlenderbotConfig, BlenderbotSmallConfig, BloomConfig, CLIPConfig, Dinov2Config, DistilBertConfig, ElectraConfig, GemmaConfig, GPT2Config, GPT2Config, GPTNeoConfig, GPTJConfig, LlamaConfig, LongT5Config, MarianConfig, MBartConfig, MistralConfig, MT5Config, OPTConfig, PegasusConfig, RegNetConfig, ResNetConfig, RobertaConfig, RobertaPreLayerNormConfig, RoFormerConfig, T5Config, VisionTextDualEncoderConfig, ViTConfig, Wav2Vec2Config, WhisperConfig, XGLMConfig, XLMRobertaConfig."
+            }
+        }
+    },
+    {
+        "DistilBertForMaskedLM": {
+            "pytorch_torch_compile_inductor": {
+                "inference_s": 0.01863626956939697,
+                "training_s": 0.08792136430740356
+            },
+            "pytorch_torch_compile_eager": {
+                "inference_s": 0.021961617469787597,
+                "training_s": 0.10529442787170411
+            },
+            "pytorch_torch_compile_cudagraphs": {
+                "inference_s": 0.03626620054244995,
+                "training_s": 0.12187812328338624
+            },
+            "pytorch_torch_compile_onnxrt": {
+                "error": "backend='onnxrt' raised:\nAssertionError: Please convert all Tensors to FakeTensors first or instantiate FakeTensorMode with 'allow_non_fake_inputs'. Found in aten.alias.default(tensor(-3.4028e+38, size=()))\n\nWhile executing %tensor : [num_users=1] = call_function[target=torch.tensor](args = (-3.4028234663852886e+38,), kwargs = {})\nOriginal traceback:\n  File \"/opt/conda/envs/xla-env/lib/python3.10/site-packages/transformers/models/distilbert/modeling_distilbert.py\", line 880, in forward\n    dlbrt_output = self.distilbert(\n  File \"/opt/conda/envs/xla-env/lib/python3.10/site-packages/transformers/models/distilbert/modeling_distilbert.py\", line 797, in forward\n    return self.transformer(\n  File \"/opt/conda/envs/xla-env/lib/python3.10/site-packages/transformers/models/distilbert/modeling_distilbert.py\", line 550, in forward\n    layer_outputs = layer_module(\n  File \"/opt/conda/envs/xla-env/lib/python3.10/site-packages/transformers/models/distilbert/modeling_distilbert.py\", line 476, in forward\n    sa_output = self.attention(\n  File \"/opt/conda/envs/xla-env/lib/python3.10/site-packages/transformers/models/distilbert/modeling_distilbert.py\", line 221, in forward\n    mask, torch.tensor(torch.finfo(scores.dtype).min)\n\n\nSet TORCH_LOGS=\"+dynamo\" and TORCHDYNAMO_VERBOSE=1 for more information\n\n\nYou can suppress this exception and fall back to eager by setting:\n    import torch._dynamo\n    torch._dynamo.config.suppress_errors = True\n"
+            },
+            "pytorch_torch_compile_openxla": {
+                "error": "torch_xla/csrc/runtime/pjrt_registry.cc:214 : Check failed: client \n*** Begin stack trace ***\n\ttsl::CurrentStackTrace()\n\ttorch_xla::runtime::InitializePjRt(std::string const&)\n\ttorch_xla::runtime::PjRtComputationClient::PjRtComputationClient()\n\t\n\ttorch_xla::runtime::GetComputationClient()\n\ttorch_xla::bridge::GetDefaultDevice()\n\ttorch_xla::bridge::GetCurrentDevice()\n\ttorch_xla::bridge::GetCurrentAtenDevice()\n\t\n\t\n\t\n\t_PyObject_MakeTpCall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\tTHPFunction_apply(_object*, _object*)\n\t\n\tPyObject_Call\n\t_PyEval_EvalFrameDefault\n\t\n\t\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t\n\t\n\tPyObject_Call\n\t_PyEval_EvalFrameDefault\n\t\n\t\n\tPyObject_Call\n\t_PyEval_EvalFrameDefault\n\t\n\t\n\tPyObject_Call\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\tPyObject_Call\n\t_PyEval_EvalFrameDefault\n\t\n\t\n\tPyObject_Call\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyObject_FastCallDictTstate\n\t_PyObject_Call_Prepend\n\t\n\tPyObject_Call\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\tPyEval_EvalCode\n\t\n\t\n\t\n\t_PyRun_SimpleFileObject\n\t_PyRun_AnyFileObject\n\tPy_RunMain\n\tPy_BytesMain\n\t__libc_start_main\n\t\n*** End stack trace ***\nUnknown PJRT_DEVICE 'CUDA'"
+            },
+            "pytorch_torch_compile_tvm": {
+                "inference_s": 0.024389266967773438,
+                "training_s": 0.10864519596099853
+            },
+            "jax_flax_xla": {
+                "inference_s": 0.0003989410400390625,
+                "training_s": 0.002221786975860596
+            }
+        }
+    },
+    {
+        "DistilBertForQuestionAnswering": {
+            "pytorch_torch_compile_inductor": {
+                "inference_s": 0.01175797700881958,
+                "training_s": 0.06554309606552124
+            },
+            "pytorch_torch_compile_eager": {
+                "inference_s": 0.015114870071411133,
+                "training_s": 0.0776622462272644
+            },
+            "pytorch_torch_compile_cudagraphs": {
+                "inference_s": 0.028927276134490965,
+                "training_s": 0.09155826091766357
+            },
+            "pytorch_torch_compile_onnxrt": {
+                "error": "backend='onnxrt' raised:\nAssertionError: Please convert all Tensors to FakeTensors first or instantiate FakeTensorMode with 'allow_non_fake_inputs'. Found in aten.alias.default(tensor(-3.4028e+38, size=()))\n\nWhile executing %tensor : [num_users=1] = call_function[target=torch.tensor](args = (-3.4028234663852886e+38,), kwargs = {})\nOriginal traceback:\n  File \"/opt/conda/envs/xla-env/lib/python3.10/site-packages/transformers/models/distilbert/modeling_distilbert.py\", line 1099, in forward\n    distilbert_output = self.distilbert(\n  File \"/opt/conda/envs/xla-env/lib/python3.10/site-packages/transformers/models/distilbert/modeling_distilbert.py\", line 797, in forward\n    return self.transformer(\n  File \"/opt/conda/envs/xla-env/lib/python3.10/site-packages/transformers/models/distilbert/modeling_distilbert.py\", line 550, in forward\n    layer_outputs = layer_module(\n  File \"/opt/conda/envs/xla-env/lib/python3.10/site-packages/transformers/models/distilbert/modeling_distilbert.py\", line 476, in forward\n    sa_output = self.attention(\n  File \"/opt/conda/envs/xla-env/lib/python3.10/site-packages/transformers/models/distilbert/modeling_distilbert.py\", line 221, in forward\n    mask, torch.tensor(torch.finfo(scores.dtype).min)\n\n\nSet TORCH_LOGS=\"+dynamo\" and TORCHDYNAMO_VERBOSE=1 for more information\n\n\nYou can suppress this exception and fall back to eager by setting:\n    import torch._dynamo\n    torch._dynamo.config.suppress_errors = True\n"
+            },
+            "pytorch_torch_compile_openxla": {
+                "error": "torch_xla/csrc/runtime/pjrt_registry.cc:214 : Check failed: client \n*** Begin stack trace ***\n\ttsl::CurrentStackTrace()\n\ttorch_xla::runtime::InitializePjRt(std::string const&)\n\ttorch_xla::runtime::PjRtComputationClient::PjRtComputationClient()\n\t\n\ttorch_xla::runtime::GetComputationClient()\n\ttorch_xla::bridge::GetDefaultDevice()\n\ttorch_xla::bridge::GetCurrentDevice()\n\ttorch_xla::bridge::GetCurrentAtenDevice()\n\t\n\t\n\t\n\t_PyObject_MakeTpCall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\tTHPFunction_apply(_object*, _object*)\n\t\n\tPyObject_Call\n\t_PyEval_EvalFrameDefault\n\t\n\t\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t\n\t\n\tPyObject_Call\n\t_PyEval_EvalFrameDefault\n\t\n\t\n\tPyObject_Call\n\t_PyEval_EvalFrameDefault\n\t\n\t\n\tPyObject_Call\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\tPyObject_Call\n\t_PyEval_EvalFrameDefault\n\t\n\t\n\tPyObject_Call\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyObject_FastCallDictTstate\n\t_PyObject_Call_Prepend\n\t\n\tPyObject_Call\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\tPyEval_EvalCode\n\t\n\t\n\t\n\t_PyRun_SimpleFileObject\n\t_PyRun_AnyFileObject\n\tPy_RunMain\n\tPy_BytesMain\n\t__libc_start_main\n\t\n*** End stack trace ***\nUnknown PJRT_DEVICE 'CUDA'"
+            },
+            "pytorch_torch_compile_tvm": {
+                "inference_s": 0.0172753643989563,
+                "training_s": 0.07663649082183838
+            },
+            "jax_flax_xla": {
+                "inference_s": 0.00041503190994262695,
+                "training_s": 0.002299318313598633
+            }
+        }
+    },
+    {
+        "DistillGPT2": {
+            "pytorch_torch_compile_inductor": {
+                "inference_s": 0.010163877010345459,
+                "training_s": 0.05750533580780029
+            },
+            "pytorch_torch_compile_eager": {
+                "inference_s": 0.014473066329956055,
+                "training_s": 0.0697019076347351
+            },
+            "pytorch_torch_compile_cudagraphs": {
+                "inference_s": 0.02847034692764282,
+                "training_s": 0.08984949350357056
+            },
+            "pytorch_torch_compile_onnxrt": {
+                "inference_s": 0.1127955150604248,
+                "training_s": 0.18542590379714965
+            },
+            "pytorch_torch_compile_openxla": {
+                "error": "torch_xla/csrc/runtime/pjrt_registry.cc:214 : Check failed: client \n*** Begin stack trace ***\n\ttsl::CurrentStackTrace()\n\ttorch_xla::runtime::InitializePjRt(std::string const&)\n\ttorch_xla::runtime::PjRtComputationClient::PjRtComputationClient()\n\t\n\ttorch_xla::runtime::GetComputationClient()\n\ttorch_xla::bridge::GetDefaultDevice()\n\ttorch_xla::bridge::GetCurrentDevice()\n\ttorch_xla::bridge::GetCurrentAtenDevice()\n\t\n\t\n\t\n\t_PyObject_MakeTpCall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\tTHPFunction_apply(_object*, _object*)\n\t\n\tPyObject_Call\n\t_PyEval_EvalFrameDefault\n\t\n\t\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t\n\t\n\tPyObject_Call\n\t_PyEval_EvalFrameDefault\n\t\n\t\n\tPyObject_Call\n\t_PyEval_EvalFrameDefault\n\t\n\t\n\tPyObject_Call\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\tPyObject_Call\n\t_PyEval_EvalFrameDefault\n\t\n\t\n\tPyObject_Call\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyObject_FastCallDictTstate\n\t_PyObject_Call_Prepend\n\t\n\tPyObject_Call\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\tPyEval_EvalCode\n\t\n\t\n\t\n\t_PyRun_SimpleFileObject\n\t_PyRun_AnyFileObject\n\tPy_RunMain\n\tPy_BytesMain\n\t__libc_start_main\n\t\n*** End stack trace ***\nUnknown PJRT_DEVICE 'CUDA'"
+            },
+            "pytorch_torch_compile_tvm": {
+                "inference_s": 0.016164717674255372,
+                "training_s": 0.07210115194320679
+            },
+            "jax_flax_xla": {
+                "inference_s": 0.0003450608253479004,
+                "training_s": 0.0018687820434570312
+            }
+        }
+    },
+    {
+        "ElectraForCausalLM": {
+            "pytorch_torch_compile_inductor": {
+                "inference_s": 0.008177273273468018,
+                "training_s": 0.030325970649719237
+            },
+            "pytorch_torch_compile_eager": {
+                "inference_s": 0.01373317003250122,
+                "training_s": 0.04443093061447143
+            },
+            "pytorch_torch_compile_cudagraphs": {
+                "inference_s": 0.039825651645660404,
+                "training_s": 0.07310187816619873
+            },
+            "pytorch_torch_compile_onnxrt": {
+                "inference_s": 0.047201375961303714,
+                "training_s": 0.10682649850845337
+            },
+            "pytorch_torch_compile_openxla": {
+                "error": "torch_xla/csrc/runtime/pjrt_registry.cc:214 : Check failed: client \n*** Begin stack trace ***\n\ttsl::CurrentStackTrace()\n\ttorch_xla::runtime::InitializePjRt(std::string const&)\n\ttorch_xla::runtime::PjRtComputationClient::PjRtComputationClient()\n\t\n\ttorch_xla::runtime::GetComputationClient()\n\ttorch_xla::bridge::GetDefaultDevice()\n\ttorch_xla::bridge::GetCurrentDevice()\n\ttorch_xla::bridge::GetCurrentAtenDevice()\n\t\n\t\n\t\n\t_PyObject_MakeTpCall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\tTHPFunction_apply(_object*, _object*)\n\t\n\tPyObject_Call\n\t_PyEval_EvalFrameDefault\n\t\n\t\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t\n\t\n\tPyObject_Call\n\t_PyEval_EvalFrameDefault\n\t\n\t\n\tPyObject_Call\n\t_PyEval_EvalFrameDefault\n\t\n\t\n\tPyObject_Call\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\tPyObject_Call\n\t_PyEval_EvalFrameDefault\n\t\n\t\n\tPyObject_Call\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyObject_FastCallDictTstate\n\t_PyObject_Call_Prepend\n\t\n\tPyObject_Call\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\tPyEval_EvalCode\n\t\n\t\n\t\n\t_PyRun_SimpleFileObject\n\t_PyRun_AnyFileObject\n\tPy_RunMain\n\tPy_BytesMain\n\t__libc_start_main\n\t\n*** End stack trace ***\nUnknown PJRT_DEVICE 'CUDA'"
+            },
+            "pytorch_torch_compile_tvm": {
+                "inference_s": 0.01750129222869873,
+                "training_s": 0.04794451951980591
+            },
+            "jax_flax_xla": {
+                "inference_s": 0.0005807018280029297,
+                "training_s": 0.0035596680641174316
+            }
+        }
+    },
+    {
+        "ElectraForQuestionAnswering": {
+            "pytorch_torch_compile_inductor": {
+                "inference_s": 0.006622691154479981,
+                "training_s": 0.026164820194244386
+            },
+            "pytorch_torch_compile_eager": {
+                "inference_s": 0.011851017475128173,
+                "training_s": 0.03894781112670898
+            },
+            "pytorch_torch_compile_cudagraphs": {
+                "inference_s": 0.03775694131851196,
+                "training_s": 0.0662157940864563
+            },
+            "pytorch_torch_compile_onnxrt": {
+                "inference_s": 0.041648895740509034,
+                "training_s": 0.10596037387847901
+            },
+            "pytorch_torch_compile_openxla": {
+                "error": "torch_xla/csrc/runtime/pjrt_registry.cc:214 : Check failed: client \n*** Begin stack trace ***\n\ttsl::CurrentStackTrace()\n\ttorch_xla::runtime::InitializePjRt(std::string const&)\n\ttorch_xla::runtime::PjRtComputationClient::PjRtComputationClient()\n\t\n\ttorch_xla::runtime::GetComputationClient()\n\ttorch_xla::bridge::GetDefaultDevice()\n\ttorch_xla::bridge::GetCurrentDevice()\n\ttorch_xla::bridge::GetCurrentAtenDevice()\n\t\n\t\n\t\n\t_PyObject_MakeTpCall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\tTHPFunction_apply(_object*, _object*)\n\t\n\tPyObject_Call\n\t_PyEval_EvalFrameDefault\n\t\n\t\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t\n\t\n\tPyObject_Call\n\t_PyEval_EvalFrameDefault\n\t\n\t\n\tPyObject_Call\n\t_PyEval_EvalFrameDefault\n\t\n\t\n\tPyObject_Call\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\tPyObject_Call\n\t_PyEval_EvalFrameDefault\n\t\n\t\n\tPyObject_Call\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyObject_FastCallDictTstate\n\t_PyObject_Call_Prepend\n\t\n\tPyObject_Call\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\tPyEval_EvalCode\n\t\n\t\n\t\n\t_PyRun_SimpleFileObject\n\t_PyRun_AnyFileObject\n\tPy_RunMain\n\tPy_BytesMain\n\t__libc_start_main\n\t\n*** End stack trace ***\nUnknown PJRT_DEVICE 'CUDA'"
+            },
+            "pytorch_torch_compile_tvm": {
+                "inference_s": 0.015574922561645508,
+                "training_s": 0.042959907054901124
+            },
+            "jax_flax_xla": {
+                "inference_s": 0.0005852699279785157,
+                "training_s": 0.0038414621353149415
+            }
+        }
+    },
+    {
+        "GoogleFnet": {
+            "pytorch_torch_compile_inductor": {
+                "inference_s": 0.030165324211120604,
+                "training_s": 0.12705384254455565
+            },
+            "pytorch_torch_compile_eager": {
+                "inference_s": 0.0354352855682373,
+                "training_s": 0.14522534847259522
+            },
+            "pytorch_torch_compile_cudagraphs": {
+                "inference_s": 0.04698073863983154,
+                "training_s": 0.16468663692474364
+            },
+            "pytorch_torch_compile_onnxrt": {
+                "inference_s": 0.20468347549438476,
+                "training_s": 0.3566495561599731
+            },
+            "pytorch_torch_compile_openxla": {
+                "inference_s": 0.038750319480895995,
+                "training_s": 0.15033519983291627
+            },
+            "pytorch_torch_compile_tvm": {
+                "inference_s": 0.03907020807266235,
+                "training_s": 0.1557848882675171
+            },
+            "jax_flax_xla": {
+                "error": "Unrecognized configuration class <class 'transformers.models.fnet.configuration_fnet.FNetConfig'> for this kind of AutoModel: FlaxAutoModel.\nModel type should be one of AlbertConfig, BartConfig, BeitConfig, BertConfig, BigBirdConfig, BlenderbotConfig, BlenderbotSmallConfig, BloomConfig, CLIPConfig, Dinov2Config, DistilBertConfig, ElectraConfig, GemmaConfig, GPT2Config, GPT2Config, GPTNeoConfig, GPTJConfig, LlamaConfig, LongT5Config, MarianConfig, MBartConfig, MistralConfig, MT5Config, OPTConfig, PegasusConfig, RegNetConfig, ResNetConfig, RobertaConfig, RobertaPreLayerNormConfig, RoFormerConfig, T5Config, VisionTextDualEncoderConfig, ViTConfig, Wav2Vec2Config, WhisperConfig, XGLMConfig, XLMRobertaConfig."
+            },
+            "tensorflow_eager": {
+                "error": "Unrecognized configuration class <class 'transformers.models.fnet.configuration_fnet.FNetConfig'> for this kind of AutoModel: TFAutoModel.\nModel type should be one of AlbertConfig, BartConfig, BertConfig, BlenderbotConfig, BlenderbotSmallConfig, BlipConfig, CamembertConfig, CLIPConfig, ConvBertConfig, ConvNextConfig, ConvNextV2Config, CTRLConfig, CvtConfig, Data2VecVisionConfig, DebertaConfig, DebertaV2Config, DeiTConfig, DistilBertConfig, DPRConfig, EfficientFormerConfig, ElectraConfig, EsmConfig, FlaubertConfig, FunnelConfig, GPT2Config, GPT2Config, GPTJConfig, GroupViTConfig, HubertConfig, IdeficsConfig, LayoutLMConfig, LayoutLMv3Config, LEDConfig, LongformerConfig, LxmertConfig, MarianConfig, MBartConfig, MistralConfig, MobileBertConfig, MobileViTConfig, MPNetConfig, MT5Config, OpenAIGPTConfig, OPTConfig, PegasusConfig, RegNetConfig, RemBertConfig, ResNetConfig, RobertaConfig, RobertaPreLayerNormConfig, RoFormerConfig, SamConfig, SegformerConfig, Speech2TextConfig, SwiftFormerConfig, SwinConfig, T5Config, TapasConfig, TransfoXLConfig, VisionTextDualEncoderConfig, ViTConfig, ViTMAEConfig, Wav2Vec2Config, WhisperConfig, XGLMConfig, XLMConfig, XLMRobertaConfig, XLNetConfig."
+            },
+            "tensorflow_xla": {
+                "error": "local variable 'tf_model' referenced before assignment"
+            }
+        }
+    },
+    {
+        "GPT2ForSequenceClassification": {
+            "pytorch_torch_compile_inductor": {
+                "inference_s": 0.019526662826538085,
+                "training_s": 0.12895687103271483
+            },
+            "pytorch_torch_compile_eager": {
+                "inference_s": 0.028576600551605224,
+                "training_s": 0.1418810272216797
+            },
+            "pytorch_torch_compile_cudagraphs": {
+                "inference_s": 0.056034998893737795,
+                "training_s": 0.17072853326797485
+            },
+            "pytorch_torch_compile_onnxrt": {
+                "inference_s": 0.21467651605606078,
+                "training_s": 0.3163098645210266
+            },
+            "pytorch_torch_compile_openxla": {
+                "error": "torch_xla/csrc/runtime/pjrt_registry.cc:214 : Check failed: client \n*** Begin stack trace ***\n\ttsl::CurrentStackTrace()\n\ttorch_xla::runtime::InitializePjRt(std::string const&)\n\ttorch_xla::runtime::PjRtComputationClient::PjRtComputationClient()\n\t\n\ttorch_xla::runtime::GetComputationClient()\n\ttorch_xla::bridge::GetDefaultDevice()\n\ttorch_xla::bridge::GetCurrentDevice()\n\ttorch_xla::bridge::GetCurrentAtenDevice()\n\t\n\t\n\t\n\t_PyObject_MakeTpCall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\tTHPFunction_apply(_object*, _object*)\n\t\n\tPyObject_Call\n\t_PyEval_EvalFrameDefault\n\t\n\t\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t\n\t\n\tPyObject_Call\n\t_PyEval_EvalFrameDefault\n\t\n\t\n\tPyObject_Call\n\t_PyEval_EvalFrameDefault\n\t\n\t\n\tPyObject_Call\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\tPyObject_Call\n\t_PyEval_EvalFrameDefault\n\t\n\t\n\tPyObject_Call\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyObject_FastCallDictTstate\n\t_PyObject_Call_Prepend\n\t\n\tPyObject_Call\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\tPyEval_EvalCode\n\t\n\t\n\t\n\t_PyRun_SimpleFileObject\n\t_PyRun_AnyFileObject\n\tPy_RunMain\n\tPy_BytesMain\n\t__libc_start_main\n\t\n*** End stack trace ***\nUnknown PJRT_DEVICE 'CUDA'"
+            },
+            "pytorch_torch_compile_tvm": {
+                "inference_s": 0.0334324049949646,
+                "training_s": 0.14737802028656005
+            },
+            "jax_flax_xla": {
+                "inference_s": 0.0006648182868957519,
+                "training_s": 0.0029027652740478515
+            }
+        }
+    },
+    {
+        "LayoutLMForMaskedLM": {
+            "pytorch_torch_compile_inductor": {
+                "inference_s": 0.033179278373718264,
+                "training_s": 0.1401208758354187
+            },
+            "pytorch_torch_compile_eager": {
+                "inference_s": 0.03660557746887207,
+                "training_s": 0.14602858304977417
+            },
+            "pytorch_torch_compile_cudagraphs": {
+                "inference_s": 0.06548347234725953,
+                "training_s": 0.16413050174713134
+            },
+            "pytorch_torch_compile_onnxrt": {
+                "inference_s": 0.12371568441390991,
+                "training_s": 0.2541581392288208
+            },
+            "pytorch_torch_compile_openxla": {
+                "error": "torch_xla/csrc/runtime/pjrt_registry.cc:214 : Check failed: client \n*** Begin stack trace ***\n\ttsl::CurrentStackTrace()\n\ttorch_xla::runtime::InitializePjRt(std::string const&)\n\ttorch_xla::runtime::PjRtComputationClient::PjRtComputationClient()\n\t\n\ttorch_xla::runtime::GetComputationClient()\n\ttorch_xla::bridge::GetDefaultDevice()\n\ttorch_xla::bridge::GetCurrentDevice()\n\ttorch_xla::bridge::GetCurrentAtenDevice()\n\t\n\t\n\t\n\t_PyObject_MakeTpCall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\tTHPFunction_apply(_object*, _object*)\n\t\n\tPyObject_Call\n\t_PyEval_EvalFrameDefault\n\t\n\t\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t\n\t\n\tPyObject_Call\n\t_PyEval_EvalFrameDefault\n\t\n\t\n\tPyObject_Call\n\t_PyEval_EvalFrameDefault\n\t\n\t\n\tPyObject_Call\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\tPyObject_Call\n\t_PyEval_EvalFrameDefault\n\t\n\t\n\tPyObject_Call\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyObject_FastCallDictTstate\n\t_PyObject_Call_Prepend\n\t\n\tPyObject_Call\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\tPyEval_EvalCode\n\t\n\t\n\t\n\t_PyRun_SimpleFileObject\n\t_PyRun_AnyFileObject\n\tPy_RunMain\n\tPy_BytesMain\n\t__libc_start_main\n\t\n*** End stack trace ***\nUnknown PJRT_DEVICE 'CUDA'"
+            },
+            "pytorch_torch_compile_tvm": {
+                "inference_s": 0.04178394317626953,
+                "training_s": 0.13531235456466675
+            },
+            "jax_flax_xla": {
+                "error": "Unrecognized configuration class <class 'transformers.models.layoutlm.configuration_layoutlm.LayoutLMConfig'> for this kind of AutoModel: FlaxAutoModel.\nModel type should be one of AlbertConfig, BartConfig, BeitConfig, BertConfig, BigBirdConfig, BlenderbotConfig, BlenderbotSmallConfig, BloomConfig, CLIPConfig, Dinov2Config, DistilBertConfig, ElectraConfig, GemmaConfig, GPT2Config, GPT2Config, GPTNeoConfig, GPTJConfig, LlamaConfig, LongT5Config, MarianConfig, MBartConfig, MistralConfig, MT5Config, OPTConfig, PegasusConfig, RegNetConfig, ResNetConfig, RobertaConfig, RobertaPreLayerNormConfig, RoFormerConfig, T5Config, VisionTextDualEncoderConfig, ViTConfig, Wav2Vec2Config, WhisperConfig, XGLMConfig, XLMRobertaConfig."
+            }
+        }
+    },
+    {
+        "LayoutLMForSequenceClassification": {
+            "pytorch_torch_compile_inductor": {
+                "inference_s": 0.02289893388748169,
+                "training_s": 0.09149527072906494
+            },
+            "pytorch_torch_compile_eager": {
+                "inference_s": 0.03094810724258423,
+                "training_s": 0.1262506937980652
+            },
+            "pytorch_torch_compile_cudagraphs": {
+                "inference_s": 0.06075786828994751,
+                "training_s": 0.1383698105812073
+            },
+            "pytorch_torch_compile_onnxrt": {
+                "inference_s": 0.09610881328582764,
+                "training_s": 0.19794790267944337
+            },
+            "pytorch_torch_compile_openxla": {
+                "error": "torch_xla/csrc/runtime/pjrt_registry.cc:214 : Check failed: client \n*** Begin stack trace ***\n\ttsl::CurrentStackTrace()\n\ttorch_xla::runtime::InitializePjRt(std::string const&)\n\ttorch_xla::runtime::PjRtComputationClient::PjRtComputationClient()\n\t\n\ttorch_xla::runtime::GetComputationClient()\n\ttorch_xla::bridge::GetDefaultDevice()\n\ttorch_xla::bridge::GetCurrentDevice()\n\ttorch_xla::bridge::GetCurrentAtenDevice()\n\t\n\t\n\t\n\t_PyObject_MakeTpCall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\tTHPFunction_apply(_object*, _object*)\n\t\n\tPyObject_Call\n\t_PyEval_EvalFrameDefault\n\t\n\t\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t\n\t\n\tPyObject_Call\n\t_PyEval_EvalFrameDefault\n\t\n\t\n\tPyObject_Call\n\t_PyEval_EvalFrameDefault\n\t\n\t\n\tPyObject_Call\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\tPyObject_Call\n\t_PyEval_EvalFrameDefault\n\t\n\t\n\tPyObject_Call\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyObject_FastCallDictTstate\n\t_PyObject_Call_Prepend\n\t\n\tPyObject_Call\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\tPyEval_EvalCode\n\t\n\t\n\t\n\t_PyRun_SimpleFileObject\n\t_PyRun_AnyFileObject\n\tPy_RunMain\n\tPy_BytesMain\n\t__libc_start_main\n\t\n*** End stack trace ***\nUnknown PJRT_DEVICE 'CUDA'"
+            },
+            "pytorch_torch_compile_tvm": {
+                "inference_s": 0.03443866491317749,
+                "training_s": 0.11109065532684326
+            },
+            "jax_flax_xla": {
+                "error": "Unrecognized configuration class <class 'transformers.models.layoutlm.configuration_layoutlm.LayoutLMConfig'> for this kind of AutoModel: FlaxAutoModel.\nModel type should be one of AlbertConfig, BartConfig, BeitConfig, BertConfig, BigBirdConfig, BlenderbotConfig, BlenderbotSmallConfig, BloomConfig, CLIPConfig, Dinov2Config, DistilBertConfig, ElectraConfig, GemmaConfig, GPT2Config, GPT2Config, GPTNeoConfig, GPTJConfig, LlamaConfig, LongT5Config, MarianConfig, MBartConfig, MistralConfig, MT5Config, OPTConfig, PegasusConfig, RegNetConfig, ResNetConfig, RobertaConfig, RobertaPreLayerNormConfig, RoFormerConfig, T5Config, VisionTextDualEncoderConfig, ViTConfig, Wav2Vec2Config, WhisperConfig, XGLMConfig, XLMRobertaConfig."
+            }
+        }
+    },
+    {
+        "M2M100ForConditionalGeneration": {
+            "pytorch_torch_compile_inductor": {
+                "inference_s": 0.15205262660980223,
+                "training_s": 0.616232750415802
+            },
+            "pytorch_torch_compile_eager": {
+                "inference_s": 0.16960955619812013,
+                "training_s": 0.6132322478294373
+            },
+            "pytorch_torch_compile_cudagraphs": {
+                "inference_s": 0.24121008872985839,
+                "training_s": 0.7200110340118409
+            },
+            "pytorch_torch_compile_onnxrt": {
+                "inference_s": 0.49413926124572755,
+                "training_s": 1.1104913568496704
+            },
+            "pytorch_torch_compile_openxla": {
+                "inference_s": 0.1632990336418152,
+                "training_s": 0.6642979311943055
+            },
+            "pytorch_torch_compile_tvm": {
+                "inference_s": 0.16753698825836183,
+                "training_s": 0.6616211748123169
+            },
+            "jax_flax_xla": {
+                "error": "Unrecognized configuration class <class 'transformers.models.m2m_100.configuration_m2m_100.M2M100Config'> for this kind of AutoModel: FlaxAutoModel.\nModel type should be one of AlbertConfig, BartConfig, BeitConfig, BertConfig, BigBirdConfig, BlenderbotConfig, BlenderbotSmallConfig, BloomConfig, CLIPConfig, Dinov2Config, DistilBertConfig, ElectraConfig, GemmaConfig, GPT2Config, GPT2Config, GPTNeoConfig, GPTJConfig, LlamaConfig, LongT5Config, MarianConfig, MBartConfig, MistralConfig, MT5Config, OPTConfig, PegasusConfig, RegNetConfig, ResNetConfig, RobertaConfig, RobertaPreLayerNormConfig, RoFormerConfig, T5Config, VisionTextDualEncoderConfig, ViTConfig, Wav2Vec2Config, WhisperConfig, XGLMConfig, XLMRobertaConfig."
+            }
+        }
+    },
+    {
+        "MBartForConditionalGeneration": {
+            "pytorch_torch_compile_inductor": {
+                "inference_s": 0.15664658308029175,
+                "training_s": 0.7857049942016602
+            },
+            "pytorch_torch_compile_eager": {
+                "inference_s": 0.18289826869964598,
+                "training_s": 0.8584749746322632
+            },
+            "pytorch_torch_compile_cudagraphs": {
+                "inference_s": 0.2642602801322937,
+                "training_s": 0.9660069155693054
+            },
+            "pytorch_torch_compile_onnxrt": {
+                "inference_s": 0.6657650780677795,
+                "training_s": 1.5562545990943908
+            },
+            "pytorch_torch_compile_openxla": {
+                "inference_s": 0.18511594772338869,
+                "training_s": 0.9230837059020996
+            },
+            "pytorch_torch_compile_tvm": {
+                "inference_s": 0.18424973726272584,
+                "training_s": 0.9192810201644898
+            },
+            "jax_flax_xla": {
+                "error": "facebook/mbart-large-50 does not appear to have a file named flax_model.msgpack but there is a file for PyTorch weights. Use `from_pt=True` to load this model from those weights."
+            }
+        }
+    },
+    {
+        "MegatronBertForCausalLM": {
+            "pytorch_torch_compile_inductor": {
+                "inference_s": 0.08046668529510498,
+                "training_s": 0.39887774229049683
+            },
+            "pytorch_torch_compile_eager": {
+                "inference_s": 0.097542724609375,
+                "training_s": 0.3476486802101135
+            },
+            "pytorch_torch_compile_cudagraphs": {
+                "inference_s": 0.1489427161216736,
+                "training_s": 0.4028339171409607
+            },
+            "pytorch_torch_compile_onnxrt": {
+                "inference_s": 0.3564783477783203,
+                "training_s": 0.6369002866744995
+            },
+            "pytorch_torch_compile_openxla": {
+                "inference_s": 0.11076748132705688,
+                "training_s": 0.3889051127433777
+            },
+            "pytorch_torch_compile_tvm": {
+                "inference_s": 0.11110765457153321,
+                "training_s": 0.35285813808441163
+            },
+            "jax_flax_xla": {
+                "error": "Unrecognized configuration class <class 'transformers.models.megatron_bert.configuration_megatron_bert.MegatronBertConfig'> for this kind of AutoModel: FlaxAutoModel.\nModel type should be one of AlbertConfig, BartConfig, BeitConfig, BertConfig, BigBirdConfig, BlenderbotConfig, BlenderbotSmallConfig, BloomConfig, CLIPConfig, Dinov2Config, DistilBertConfig, ElectraConfig, GemmaConfig, GPT2Config, GPT2Config, GPTNeoConfig, GPTJConfig, LlamaConfig, LongT5Config, MarianConfig, MBartConfig, MistralConfig, MT5Config, OPTConfig, PegasusConfig, RegNetConfig, ResNetConfig, RobertaConfig, RobertaPreLayerNormConfig, RoFormerConfig, T5Config, VisionTextDualEncoderConfig, ViTConfig, Wav2Vec2Config, WhisperConfig, XGLMConfig, XLMRobertaConfig."
+            },
+            "tensorflow_eager": {
+                "error": "Unrecognized configuration class <class 'transformers.models.megatron_bert.configuration_megatron_bert.MegatronBertConfig'> for this kind of AutoModel: TFAutoModel.\nModel type should be one of AlbertConfig, BartConfig, BertConfig, BlenderbotConfig, BlenderbotSmallConfig, BlipConfig, CamembertConfig, CLIPConfig, ConvBertConfig, ConvNextConfig, ConvNextV2Config, CTRLConfig, CvtConfig, Data2VecVisionConfig, DebertaConfig, DebertaV2Config, DeiTConfig, DistilBertConfig, DPRConfig, EfficientFormerConfig, ElectraConfig, EsmConfig, FlaubertConfig, FunnelConfig, GPT2Config, GPT2Config, GPTJConfig, GroupViTConfig, HubertConfig, IdeficsConfig, LayoutLMConfig, LayoutLMv3Config, LEDConfig, LongformerConfig, LxmertConfig, MarianConfig, MBartConfig, MistralConfig, MobileBertConfig, MobileViTConfig, MPNetConfig, MT5Config, OpenAIGPTConfig, OPTConfig, PegasusConfig, RegNetConfig, RemBertConfig, ResNetConfig, RobertaConfig, RobertaPreLayerNormConfig, RoFormerConfig, SamConfig, SegformerConfig, Speech2TextConfig, SwiftFormerConfig, SwinConfig, T5Config, TapasConfig, TransfoXLConfig, VisionTextDualEncoderConfig, ViTConfig, ViTMAEConfig, Wav2Vec2Config, WhisperConfig, XGLMConfig, XLMConfig, XLMRobertaConfig, XLNetConfig."
+            },
+            "tensorflow_xla": {
+                "error": "local variable 'tf_model' referenced before assignment"
+            }
+        }
+    },
+    {
+        "MegatronBertForQuestionAnswering": {
+            "pytorch_torch_compile_inductor": {
+                "inference_s": 0.07222132921218873,
+                "training_s": 0.4467200040817261
+            },
+            "pytorch_torch_compile_eager": {
+                "inference_s": 0.09053476810455323,
+                "training_s": 0.39230018854141235
+            },
+            "pytorch_torch_compile_cudagraphs": {
+                "inference_s": 0.14044231176376343,
+                "training_s": 0.44627482175827027
+            },
+            "pytorch_torch_compile_onnxrt": {
+                "inference_s": 0.32253570795059205,
+                "training_s": 0.5591227388381959
+            },
+            "pytorch_torch_compile_openxla": {
+                "inference_s": 0.10293773412704468,
+                "training_s": 0.3532972812652588
+            },
+            "pytorch_torch_compile_tvm": {
+                "inference_s": 0.10002121210098266,
+                "training_s": 0.3553775238990784
+            },
+            "jax_flax_xla": {
+                "error": "Unrecognized configuration class <class 'transformers.models.megatron_bert.configuration_megatron_bert.MegatronBertConfig'> for this kind of AutoModel: FlaxAutoModel.\nModel type should be one of AlbertConfig, BartConfig, BeitConfig, BertConfig, BigBirdConfig, BlenderbotConfig, BlenderbotSmallConfig, BloomConfig, CLIPConfig, Dinov2Config, DistilBertConfig, ElectraConfig, GemmaConfig, GPT2Config, GPT2Config, GPTNeoConfig, GPTJConfig, LlamaConfig, LongT5Config, MarianConfig, MBartConfig, MistralConfig, MT5Config, OPTConfig, PegasusConfig, RegNetConfig, ResNetConfig, RobertaConfig, RobertaPreLayerNormConfig, RoFormerConfig, T5Config, VisionTextDualEncoderConfig, ViTConfig, Wav2Vec2Config, WhisperConfig, XGLMConfig, XLMRobertaConfig."
+            },
+            "tensorflow_eager": {
+                "error": "Unrecognized configuration class <class 'transformers.models.megatron_bert.configuration_megatron_bert.MegatronBertConfig'> for this kind of AutoModel: TFAutoModel.\nModel type should be one of AlbertConfig, BartConfig, BertConfig, BlenderbotConfig, BlenderbotSmallConfig, BlipConfig, CamembertConfig, CLIPConfig, ConvBertConfig, ConvNextConfig, ConvNextV2Config, CTRLConfig, CvtConfig, Data2VecVisionConfig, DebertaConfig, DebertaV2Config, DeiTConfig, DistilBertConfig, DPRConfig, EfficientFormerConfig, ElectraConfig, EsmConfig, FlaubertConfig, FunnelConfig, GPT2Config, GPT2Config, GPTJConfig, GroupViTConfig, HubertConfig, IdeficsConfig, LayoutLMConfig, LayoutLMv3Config, LEDConfig, LongformerConfig, LxmertConfig, MarianConfig, MBartConfig, MistralConfig, MobileBertConfig, MobileViTConfig, MPNetConfig, MT5Config, OpenAIGPTConfig, OPTConfig, PegasusConfig, RegNetConfig, RemBertConfig, ResNetConfig, RobertaConfig, RobertaPreLayerNormConfig, RoFormerConfig, SamConfig, SegformerConfig, Speech2TextConfig, SwiftFormerConfig, SwinConfig, T5Config, TapasConfig, TransfoXLConfig, VisionTextDualEncoderConfig, ViTConfig, ViTMAEConfig, Wav2Vec2Config, WhisperConfig, XGLMConfig, XLMConfig, XLMRobertaConfig, XLNetConfig."
+            },
+            "tensorflow_xla": {
+                "error": "local variable 'tf_model' referenced before assignment"
+            }
+        }
+    },
+    {
+        "MobileBertForMaskedLM": {
+            "pytorch_torch_compile_inductor": {
+                "inference_s": 0.04917330265045166,
+                "training_s": 0.13390392541885376
+            },
+            "pytorch_torch_compile_eager": {
+                "inference_s": 0.05417840003967285,
+                "training_s": 0.1805603051185608
+            },
+            "pytorch_torch_compile_cudagraphs": {
+                "inference_s": 0.14286931991577148,
+                "training_s": 0.27750051975250245
+            },
+            "pytorch_torch_compile_onnxrt": {
+                "error": "backend='onnxrt' raised:\nAssertionError: Please convert all Tensors to FakeTensors first or instantiate FakeTensorMode with 'allow_non_fake_inputs'. Found in aten.alias.default(tensor(1000, size=()))\n\nWhile executing %tensor : [num_users=0] = call_function[target=torch.tensor](args = (1000,), kwargs = {})\nOriginal traceback:\n  File \"/opt/conda/envs/xla-env/lib/python3.10/site-packages/transformers/models/mobilebert/modeling_mobilebert.py\", line 1091, in forward\n    outputs = self.mobilebert(\n  File \"/opt/conda/envs/xla-env/lib/python3.10/site-packages/transformers/models/mobilebert/modeling_mobilebert.py\", line 898, in forward\n    encoder_outputs = self.encoder(\n  File \"/opt/conda/envs/xla-env/lib/python3.10/site-packages/transformers/models/mobilebert/modeling_mobilebert.py\", line 580, in forward\n    layer_outputs = layer_module(\n  File \"/opt/conda/envs/xla-env/lib/python3.10/site-packages/transformers/models/mobilebert/modeling_mobilebert.py\", line 547, in forward\n    torch.tensor(1000),\n\n\nSet TORCH_LOGS=\"+dynamo\" and TORCHDYNAMO_VERBOSE=1 for more information\n\n\nYou can suppress this exception and fall back to eager by setting:\n    import torch._dynamo\n    torch._dynamo.config.suppress_errors = True\n"
+            },
+            "pytorch_torch_compile_openxla": {
+                "error": "torch_xla/csrc/runtime/pjrt_registry.cc:214 : Check failed: client \n*** Begin stack trace ***\n\ttsl::CurrentStackTrace()\n\ttorch_xla::runtime::InitializePjRt(std::string const&)\n\ttorch_xla::runtime::PjRtComputationClient::PjRtComputationClient()\n\t\n\ttorch_xla::runtime::GetComputationClient()\n\ttorch_xla::bridge::GetDefaultDevice()\n\ttorch_xla::bridge::GetCurrentDevice()\n\ttorch_xla::bridge::GetCurrentAtenDevice()\n\t\n\t\n\t\n\t_PyObject_MakeTpCall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\tTHPFunction_apply(_object*, _object*)\n\t\n\tPyObject_Call\n\t_PyEval_EvalFrameDefault\n\t\n\t\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t\n\t\n\tPyObject_Call\n\t_PyEval_EvalFrameDefault\n\t\n\t\n\tPyObject_Call\n\t_PyEval_EvalFrameDefault\n\t\n\t\n\tPyObject_Call\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\tPyObject_Call\n\t_PyEval_EvalFrameDefault\n\t\n\t\n\tPyObject_Call\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyObject_FastCallDictTstate\n\t_PyObject_Call_Prepend\n\t\n\tPyObject_Call\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\tPyEval_EvalCode\n\t\n\t\n\t\n\t_PyRun_SimpleFileObject\n\t_PyRun_AnyFileObject\n\tPy_RunMain\n\tPy_BytesMain\n\t__libc_start_main\n\t\n*** End stack trace ***\nUnknown PJRT_DEVICE 'CUDA'"
+            },
+            "pytorch_torch_compile_tvm": {
+                "inference_s": 0.06403514146804809,
+                "training_s": 0.18799235582351684
+            },
+            "jax_flax_xla": {
+                "error": "Unrecognized configuration class <class 'transformers.models.mobilebert.configuration_mobilebert.MobileBertConfig'> for this kind of AutoModel: FlaxAutoModel.\nModel type should be one of AlbertConfig, BartConfig, BeitConfig, BertConfig, BigBirdConfig, BlenderbotConfig, BlenderbotSmallConfig, BloomConfig, CLIPConfig, Dinov2Config, DistilBertConfig, ElectraConfig, GemmaConfig, GPT2Config, GPT2Config, GPTNeoConfig, GPTJConfig, LlamaConfig, LongT5Config, MarianConfig, MBartConfig, MistralConfig, MT5Config, OPTConfig, PegasusConfig, RegNetConfig, ResNetConfig, RobertaConfig, RobertaPreLayerNormConfig, RoFormerConfig, T5Config, VisionTextDualEncoderConfig, ViTConfig, Wav2Vec2Config, WhisperConfig, XGLMConfig, XLMRobertaConfig."
+            }
+        }
+    },
+    {
+        "MobileBertForQuestionAnswering": {
+            "pytorch_torch_compile_inductor": {
+                "inference_s": 0.03745289087295532,
+                "training_s": 0.11164246082305908
+            },
+            "pytorch_torch_compile_eager": {
+                "inference_s": 0.0378567910194397,
+                "training_s": 0.14260390758514405
+            },
+            "pytorch_torch_compile_cudagraphs": {
+                "inference_s": 0.12879945516586302,
+                "training_s": 0.2490171480178833
+            },
+            "pytorch_torch_compile_onnxrt": {
+                "error": "backend='onnxrt' raised:\nAssertionError: Please convert all Tensors to FakeTensors first or instantiate FakeTensorMode with 'allow_non_fake_inputs'. Found in aten.alias.default(tensor(1000, size=()))\n\nWhile executing %tensor : [num_users=0] = call_function[target=torch.tensor](args = (1000,), kwargs = {})\nOriginal traceback:\n  File \"/opt/conda/envs/xla-env/lib/python3.10/site-packages/transformers/models/mobilebert/modeling_mobilebert.py\", line 1392, in forward\n    outputs = self.mobilebert(\n  File \"/opt/conda/envs/xla-env/lib/python3.10/site-packages/transformers/models/mobilebert/modeling_mobilebert.py\", line 898, in forward\n    encoder_outputs = self.encoder(\n  File \"/opt/conda/envs/xla-env/lib/python3.10/site-packages/transformers/models/mobilebert/modeling_mobilebert.py\", line 580, in forward\n    layer_outputs = layer_module(\n  File \"/opt/conda/envs/xla-env/lib/python3.10/site-packages/transformers/models/mobilebert/modeling_mobilebert.py\", line 547, in forward\n    torch.tensor(1000),\n\n\nSet TORCH_LOGS=\"+dynamo\" and TORCHDYNAMO_VERBOSE=1 for more information\n\n\nYou can suppress this exception and fall back to eager by setting:\n    import torch._dynamo\n    torch._dynamo.config.suppress_errors = True\n"
+            },
+            "pytorch_torch_compile_openxla": {
+                "error": "torch_xla/csrc/runtime/pjrt_registry.cc:214 : Check failed: client \n*** Begin stack trace ***\n\ttsl::CurrentStackTrace()\n\ttorch_xla::runtime::InitializePjRt(std::string const&)\n\ttorch_xla::runtime::PjRtComputationClient::PjRtComputationClient()\n\t\n\ttorch_xla::runtime::GetComputationClient()\n\ttorch_xla::bridge::GetDefaultDevice()\n\ttorch_xla::bridge::GetCurrentDevice()\n\ttorch_xla::bridge::GetCurrentAtenDevice()\n\t\n\t\n\t\n\t_PyObject_MakeTpCall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\tTHPFunction_apply(_object*, _object*)\n\t\n\tPyObject_Call\n\t_PyEval_EvalFrameDefault\n\t\n\t\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t\n\t\n\tPyObject_Call\n\t_PyEval_EvalFrameDefault\n\t\n\t\n\tPyObject_Call\n\t_PyEval_EvalFrameDefault\n\t\n\t\n\tPyObject_Call\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\tPyObject_Call\n\t_PyEval_EvalFrameDefault\n\t\n\t\n\tPyObject_Call\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyObject_FastCallDictTstate\n\t_PyObject_Call_Prepend\n\t\n\tPyObject_Call\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\tPyEval_EvalCode\n\t\n\t\n\t\n\t_PyRun_SimpleFileObject\n\t_PyRun_AnyFileObject\n\tPy_RunMain\n\tPy_BytesMain\n\t__libc_start_main\n\t\n*** End stack trace ***\nUnknown PJRT_DEVICE 'CUDA'"
+            },
+            "pytorch_torch_compile_tvm": {
+                "inference_s": 0.050071516036987306,
+                "training_s": 0.1549700403213501
+            },
+            "jax_flax_xla": {
+                "error": "Unrecognized configuration class <class 'transformers.models.mobilebert.configuration_mobilebert.MobileBertConfig'> for this kind of AutoModel: FlaxAutoModel.\nModel type should be one of AlbertConfig, BartConfig, BeitConfig, BertConfig, BigBirdConfig, BlenderbotConfig, BlenderbotSmallConfig, BloomConfig, CLIPConfig, Dinov2Config, DistilBertConfig, ElectraConfig, GemmaConfig, GPT2Config, GPT2Config, GPTNeoConfig, GPTJConfig, LlamaConfig, LongT5Config, MarianConfig, MBartConfig, MistralConfig, MT5Config, OPTConfig, PegasusConfig, RegNetConfig, ResNetConfig, RobertaConfig, RobertaPreLayerNormConfig, RoFormerConfig, T5Config, VisionTextDualEncoderConfig, ViTConfig, Wav2Vec2Config, WhisperConfig, XGLMConfig, XLMRobertaConfig."
+            }
+        }
+    },
+    {
+        "MT5ForConditionalGeneration": {
+            "pytorch_torch_compile_inductor": {
+                "inference_s": 0.09638539552688599,
+                "training_s": 0.5657290363311768
+            },
+            "pytorch_torch_compile_eager": {
+                "inference_s": 0.11396507024765015,
+                "training_s": 0.6166904783248901
+            },
+            "pytorch_torch_compile_cudagraphs": {
+                "inference_s": 0.2027975845336914,
+                "training_s": 0.7169177031517029
+            },
+            "pytorch_torch_compile_onnxrt": {
+                "inference_s": 1.4761250972747804,
+                "training_s": 3.456305775642395
+            },
+            "pytorch_torch_compile_openxla": {
+                "inference_s": 0.12309100389480591,
+                "training_s": 0.6485016417503356
+            },
+            "pytorch_torch_compile_tvm": {
+                "inference_s": 0.12728022813796996,
+                "training_s": 0.6476497077941894
+            },
+            "jax_flax_xla": {
+                "error": "Make sure to provide both `input_ids` and `decoder_input_ids`. `decoder_input_ids` is not passed here."
+            }
+        }
+    },
+    {
+        "OPTForCausalLM": {
+            "error": "OSError('facebook/opt-125m does not appear to have a file named pytorch_model.bin but there is a file for TensorFlow weights. Use `from_tf=True` to load this model from those weights.')",
+            "jax_flax_xla": {
+                "error": "FlaxOPTPreTrainedModel.__call__() got an unexpected keyword argument 'train'"
+            }
+        }
+    },
+    {
+        "PegasusForCausalLM": {
+            "pytorch_torch_compile_inductor": {
+                "inference_s": 0.07337441444396972,
+                "training_s": 0.3545255184173584
+            },
+            "pytorch_torch_compile_eager": {
+                "inference_s": 0.08066541194915772,
+                "training_s": 0.39761847019195556
+            },
+            "pytorch_torch_compile_cudagraphs": {
+                "inference_s": 0.12721861362457276,
+                "training_s": 0.4523041391372681
+            },
+            "pytorch_torch_compile_onnxrt": {
+                "inference_s": 0.36880207777023316,
+                "training_s": 0.6502600407600403
+            },
+            "pytorch_torch_compile_openxla": {
+                "inference_s": 0.07963517427444458,
+                "training_s": 0.4731329870223999
+            },
+            "pytorch_torch_compile_tvm": {
+                "inference_s": 0.08888456821441651,
+                "training_s": 0.4659328675270081
+            },
+            "jax_flax_xla": {
+                "inference_s": 0.002892282009124756,
+                "training_s": 0.01327815294265747
+            }
+        }
+    },
+    {
+        "PegasusForConditionalGeneration": {
+            "pytorch_torch_compile_inductor": {
+                "inference_s": 0.11896573305130005,
+                "training_s": 0.6108526039123535
+            },
+            "pytorch_torch_compile_eager": {
+                "inference_s": 0.1492159152030945,
+                "training_s": 0.6706930136680603
+            },
+            "pytorch_torch_compile_cudagraphs": {
+                "inference_s": 0.2596094560623169,
+                "training_s": 0.8134930419921875
+            },
+            "pytorch_torch_compile_onnxrt": {
+                "inference_s": 0.6868885731697083,
+                "training_s": 1.1568407464027404
+            },
+            "pytorch_torch_compile_openxla": {
+                "inference_s": 0.1578865885734558,
+                "training_s": 0.7331786155700684
+            },
+            "pytorch_torch_compile_tvm": {
+                "inference_s": 0.15782861709594725,
+                "training_s": 0.7272067451477051
+            },
+            "jax_flax_xla": {
+                "inference_s": 0.0031201958656311033,
+                "training_s": 0.013759968280792236
+            }
+        }
+    },
+    {
+        "PLBartForConditionalGeneration": {
+            "pytorch_torch_compile_inductor": {
+                "inference_s": 0.03934596061706543,
+                "training_s": 0.1720280933380127
+            },
+            "pytorch_torch_compile_eager": {
+                "inference_s": 0.05059962034225464,
+                "training_s": 0.2022915768623352
+            },
+            "pytorch_torch_compile_cudagraphs": {
+                "inference_s": 0.09388178825378418,
+                "training_s": 0.2588030457496643
+            },
+            "pytorch_torch_compile_onnxrt": {
+                "inference_s": 0.18021971702575684,
+                "training_s": 0.39225454807281496
+            },
+            "pytorch_torch_compile_openxla": {
+                "inference_s": 0.050260372161865234,
+                "training_s": 0.26184859037399294
+            },
+            "pytorch_torch_compile_tvm": {
+                "inference_s": 0.051166810989379884,
+                "training_s": 0.25945497274398804
+            },
+            "jax_flax_xla": {
+                "error": "Unrecognized configuration class <class 'transformers.models.plbart.configuration_plbart.PLBartConfig'> for this kind of AutoModel: FlaxAutoModel.\nModel type should be one of AlbertConfig, BartConfig, BeitConfig, BertConfig, BigBirdConfig, BlenderbotConfig, BlenderbotSmallConfig, BloomConfig, CLIPConfig, Dinov2Config, DistilBertConfig, ElectraConfig, GemmaConfig, GPT2Config, GPT2Config, GPTNeoConfig, GPTJConfig, LlamaConfig, LongT5Config, MarianConfig, MBartConfig, MistralConfig, MT5Config, OPTConfig, PegasusConfig, RegNetConfig, ResNetConfig, RobertaConfig, RobertaPreLayerNormConfig, RoFormerConfig, T5Config, VisionTextDualEncoderConfig, ViTConfig, Wav2Vec2Config, WhisperConfig, XGLMConfig, XLMRobertaConfig."
+            }
+        }
+    },
+    {
+        "RobertaForCausalLM": {
+            "pytorch_torch_compile_inductor": {
+                "inference_s": 0.036044204235076906,
+                "training_s": 0.1580580711364746
+            },
+            "pytorch_torch_compile_eager": {
+                "inference_s": 0.04105679750442505,
+                "training_s": 0.16344421863555908
+            },
+            "pytorch_torch_compile_cudagraphs": {
+                "inference_s": 0.07302878379821777,
+                "training_s": 0.2069071936607361
+            },
+            "pytorch_torch_compile_onnxrt": {
+                "inference_s": 0.1485906195640564,
+                "training_s": 0.29111231088638306
+            },
+            "pytorch_torch_compile_openxla": {
+                "error": "torch_xla/csrc/runtime/pjrt_registry.cc:214 : Check failed: client \n*** Begin stack trace ***\n\ttsl::CurrentStackTrace()\n\ttorch_xla::runtime::InitializePjRt(std::string const&)\n\ttorch_xla::runtime::PjRtComputationClient::PjRtComputationClient()\n\t\n\ttorch_xla::runtime::GetComputationClient()\n\ttorch_xla::bridge::GetDefaultDevice()\n\ttorch_xla::bridge::GetCurrentDevice()\n\ttorch_xla::bridge::GetCurrentAtenDevice()\n\t\n\t\n\t\n\t_PyObject_MakeTpCall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\tTHPFunction_apply(_object*, _object*)\n\t\n\tPyObject_Call\n\t_PyEval_EvalFrameDefault\n\t\n\t\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t\n\t\n\tPyObject_Call\n\t_PyEval_EvalFrameDefault\n\t\n\t\n\tPyObject_Call\n\t_PyEval_EvalFrameDefault\n\t\n\t\n\tPyObject_Call\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\tPyObject_Call\n\t_PyEval_EvalFrameDefault\n\t\n\t\n\tPyObject_Call\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyObject_FastCallDictTstate\n\t_PyObject_Call_Prepend\n\t\n\tPyObject_Call\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\tPyEval_EvalCode\n\t\n\t\n\t\n\t_PyRun_SimpleFileObject\n\t_PyRun_AnyFileObject\n\tPy_RunMain\n\tPy_BytesMain\n\t__libc_start_main\n\t\n*** End stack trace ***\nUnknown PJRT_DEVICE 'CUDA'"
+            },
+            "pytorch_torch_compile_tvm": {
+                "inference_s": 0.04607032060623169,
+                "training_s": 0.1887372589111328
+            },
+            "jax_flax_xla": {
+                "inference_s": 0.0006990957260131835,
+                "training_s": 0.0038555455207824707
+            }
+        }
+    },
+    {
+        "RobertaForQuestionAnswering": {
+            "pytorch_torch_compile_inductor": {
+                "inference_s": 0.022240300178527832,
+                "training_s": 0.1081736707687378
+            },
+            "pytorch_torch_compile_eager": {
+                "inference_s": 0.028608567714691162,
+                "training_s": 0.10960547685623169
+            },
+            "pytorch_torch_compile_cudagraphs": {
+                "inference_s": 0.05662806510925293,
+                "training_s": 0.13856037616729736
+            },
+            "pytorch_torch_compile_onnxrt": {
+                "inference_s": 0.10119266748428345,
+                "training_s": 0.2026730513572693
+            },
+            "pytorch_torch_compile_openxla": {
+                "error": "torch_xla/csrc/runtime/pjrt_registry.cc:214 : Check failed: client \n*** Begin stack trace ***\n\ttsl::CurrentStackTrace()\n\ttorch_xla::runtime::InitializePjRt(std::string const&)\n\ttorch_xla::runtime::PjRtComputationClient::PjRtComputationClient()\n\t\n\ttorch_xla::runtime::GetComputationClient()\n\ttorch_xla::bridge::GetDefaultDevice()\n\ttorch_xla::bridge::GetCurrentDevice()\n\ttorch_xla::bridge::GetCurrentAtenDevice()\n\t\n\t\n\t\n\t_PyObject_MakeTpCall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\tTHPFunction_apply(_object*, _object*)\n\t\n\tPyObject_Call\n\t_PyEval_EvalFrameDefault\n\t\n\t\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t\n\t\n\tPyObject_Call\n\t_PyEval_EvalFrameDefault\n\t\n\t\n\tPyObject_Call\n\t_PyEval_EvalFrameDefault\n\t\n\t\n\tPyObject_Call\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\tPyObject_Call\n\t_PyEval_EvalFrameDefault\n\t\n\t\n\tPyObject_Call\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyObject_FastCallDictTstate\n\t_PyObject_Call_Prepend\n\t\n\tPyObject_Call\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\tPyEval_EvalCode\n\t\n\t\n\t\n\t_PyRun_SimpleFileObject\n\t_PyRun_AnyFileObject\n\tPy_RunMain\n\tPy_BytesMain\n\t__libc_start_main\n\t\n*** End stack trace ***\nUnknown PJRT_DEVICE 'CUDA'"
+            },
+            "pytorch_torch_compile_tvm": {
+                "inference_s": 0.03392775297164917,
+                "training_s": 0.11609891176223755
+            },
+            "jax_flax_xla": {
+                "inference_s": 0.0006959939002990723,
+                "training_s": 0.003915333747863769
+            }
+        }
+    },
+    {
+        "Speech2Text2ForCausalLM": {
+            "pytorch_torch_compile_inductor": {
+                "inference_s": 0.007846369743347167,
+                "training_s": 0.029085745811462404
+            },
+            "pytorch_torch_compile_eager": {
+                "inference_s": 0.011511642932891846,
+                "training_s": 0.030616462230682373
+            },
+            "pytorch_torch_compile_cudagraphs": {
+                "inference_s": 0.02619802951812744,
+                "training_s": 0.04883721351623535
+            },
+            "pytorch_torch_compile_onnxrt": {
+                "inference_s": 0.05608471393585205,
+                "training_s": 0.1134431266784668
+            },
+            "pytorch_torch_compile_openxla": {
+                "inference_s": 0.011628043651580811,
+                "training_s": 0.03270037651062012
+            },
+            "pytorch_torch_compile_tvm": {
+                "inference_s": 0.011801295280456543,
+                "training_s": 0.03126561164855957
+            },
+            "jax_flax_xla": {
+                "error": "Unrecognized configuration class <class 'transformers.models.speech_to_text.configuration_speech_to_text.Speech2TextConfig'> for this kind of AutoModel: FlaxAutoModel.\nModel type should be one of AlbertConfig, BartConfig, BeitConfig, BertConfig, BigBirdConfig, BlenderbotConfig, BlenderbotSmallConfig, BloomConfig, CLIPConfig, Dinov2Config, DistilBertConfig, ElectraConfig, GemmaConfig, GPT2Config, GPT2Config, GPTNeoConfig, GPTJConfig, LlamaConfig, LongT5Config, MarianConfig, MBartConfig, MistralConfig, MT5Config, OPTConfig, PegasusConfig, RegNetConfig, ResNetConfig, RobertaConfig, RobertaPreLayerNormConfig, RoFormerConfig, T5Config, VisionTextDualEncoderConfig, ViTConfig, Wav2Vec2Config, WhisperConfig, XGLMConfig, XLMRobertaConfig."
+            }
+        }
+    },
+    {
+        "T5ForConditionalGeneration": {
+            "pytorch_torch_compile_inductor": {
+                "inference_s": 0.06302282810211182,
+                "training_s": 0.3017886757850647
+            },
+            "pytorch_torch_compile_eager": {
+                "inference_s": 0.08840781211853027,
+                "training_s": 0.3290767288208008
+            },
+            "pytorch_torch_compile_cudagraphs": {
+                "inference_s": 0.16448455333709716,
+                "training_s": 0.4407279777526856
+            },
+            "pytorch_torch_compile_onnxrt": {
+                "inference_s": 0.2872833299636841,
+                "training_s": 0.5357684421539307
+            },
+            "pytorch_torch_compile_openxla": {
+                "inference_s": 0.09766252040863037,
+                "training_s": 0.36821441650390624
+            },
+            "pytorch_torch_compile_tvm": {
+                "inference_s": 0.09635816812515259,
+                "training_s": 0.3716914296150208
+            },
+            "jax_flax_xla": {
+                "inference_s": 0.0017744874954223632,
+                "training_s": 0.007834587097167969
+            },
+            "tensorflow_eager": {
+                "error": "Failed to import transformers.models.t5.modeling_tf_t5 because of the following error (look up to see its traceback):\nYour currently installed version of Keras is Keras 3, but this is not yet supported in Transformers. Please install the backwards-compatible tf-keras package with `pip install tf-keras`."
+            },
+            "tensorflow_xla": {
+                "error": "local variable 'tf_model' referenced before assignment"
+            }
+        }
+    },
+    {
+        "T5Small": {
+            "pytorch_torch_compile_inductor": {
+                "inference_s": 0.03629147291183472,
+                "training_s": 0.13520629167556764
+            },
+            "pytorch_torch_compile_eager": {
+                "inference_s": 0.040062830448150635,
+                "training_s": 0.13860891580581666
+            },
+            "pytorch_torch_compile_cudagraphs": {
+                "inference_s": 0.04034661054611206,
+                "training_s": 0.1372301173210144
+            },
+            "pytorch_torch_compile_onnxrt": {
+                "inference_s": 0.04042085886001587,
+                "training_s": 0.13626365423202513
+            },
+            "pytorch_torch_compile_openxla": {
+                "inference_s": 0.0400326418876648,
+                "training_s": 0.1392365312576294
+            },
+            "pytorch_torch_compile_tvm": {
+                "inference_s": 0.040136899948120114,
+                "training_s": 0.13641860723495483
+            },
+            "jax_flax_xla": {
+                "inference_s": 0.0008004474639892579,
+                "training_s": 0.0041927933692932125
+            },
+            "tensorflow_eager": {
+                "error": "Failed to import transformers.models.t5.modeling_tf_t5 because of the following error (look up to see its traceback):\nYour currently installed version of Keras is Keras 3, but this is not yet supported in Transformers. Please install the backwards-compatible tf-keras package with `pip install tf-keras`."
+            },
+            "tensorflow_xla": {
+                "error": "local variable 'tf_model' referenced before assignment"
+            }
+        }
+    },
+    {
+        "TrOCRForCausalLM": {
+            "pytorch_torch_compile_inductor": {
+                "error": "You have to specify pixel_values"
+            },
+            "pytorch_torch_compile_eager": {
+                "error": "You have to specify pixel_values"
+            },
+            "pytorch_torch_compile_cudagraphs": {
+                "error": "You have to specify pixel_values"
+            },
+            "pytorch_torch_compile_onnxrt": {
+                "error": "You have to specify pixel_values"
+            },
+            "pytorch_torch_compile_openxla": {
+                "error": "You have to specify pixel_values"
+            },
+            "pytorch_torch_compile_tvm": {
+                "error": "You have to specify pixel_values"
+            },
+            "jax_flax_xla": {
+                "error": "Unrecognized configuration class <class 'transformers.models.vision_encoder_decoder.configuration_vision_encoder_decoder.VisionEncoderDecoderConfig'> for this kind of AutoModel: FlaxAutoModel.\nModel type should be one of AlbertConfig, BartConfig, BeitConfig, BertConfig, BigBirdConfig, BlenderbotConfig, BlenderbotSmallConfig, BloomConfig, CLIPConfig, Dinov2Config, DistilBertConfig, ElectraConfig, GemmaConfig, GPT2Config, GPT2Config, GPTNeoConfig, GPTJConfig, LlamaConfig, LongT5Config, MarianConfig, MBartConfig, MistralConfig, MT5Config, OPTConfig, PegasusConfig, RegNetConfig, ResNetConfig, RobertaConfig, RobertaPreLayerNormConfig, RoFormerConfig, T5Config, VisionTextDualEncoderConfig, ViTConfig, Wav2Vec2Config, WhisperConfig, XGLMConfig, XLMRobertaConfig."
+            },
+            "error": "AttributeError(\"'VisionEncoderDecoderModel' object has no attribute '_shift_right'\")"
+        }
+    },
+    {
+        "XGLMForCausalLM": {
+            "pytorch_torch_compile_inductor": {
+                "inference_s": 0.17264623880386354,
+                "training_s": 0.893746063709259
+            },
+            "pytorch_torch_compile_eager": {
+                "inference_s": 0.1742038059234619,
+                "training_s": 1.075943455696106
+            },
+            "pytorch_torch_compile_cudagraphs": {
+                "inference_s": 0.2392353320121765,
+                "training_s": 1.1810668301582337
+            },
+            "pytorch_torch_compile_onnxrt": {
+                "error": "backend='onnxrt' raised:\nAssertionError: Please convert all Tensors to FakeTensors first or instantiate FakeTensorMode with 'allow_non_fake_inputs'. Found in aten.alias.default(tensor(-3.4028e+38, size=()))\n\nWhile executing %tensor : [num_users=1] = call_function[target=torch.tensor](args = (-3.4028234663852886e+38,), kwargs = {device: cpu})\nOriginal traceback:\n  File \"/opt/conda/envs/xla-env/lib/python3.10/site-packages/transformers/models/xglm/modeling_xglm.py\", line 413, in forward\n    hidden_states, self_attn_weights, present_key_value = self.self_attn(\n  File \"/opt/conda/envs/xla-env/lib/python3.10/site-packages/transformers/models/xglm/modeling_xglm.py\", line 295, in forward\n    attn_weights, torch.tensor(torch.finfo(attn_weights.dtype).min, device=attn_weights.device)\n\n\nSet TORCH_LOGS=\"+dynamo\" and TORCHDYNAMO_VERBOSE=1 for more information\n\n\nYou can suppress this exception and fall back to eager by setting:\n    import torch._dynamo\n    torch._dynamo.config.suppress_errors = True\n"
+            },
+            "pytorch_torch_compile_openxla": {
+                "inference_s": 0.17184276819229127,
+                "training_s": 1.057679569721222
+            },
+            "pytorch_torch_compile_tvm": {
+                "inference_s": 0.17337477922439576,
+                "training_s": 1.020522150993347
+            },
+            "jax_flax_xla": {
+                "inference_s": 0.0016668772697448731,
+                "training_s": 0.007786545753479004
+            }
+        }
+    },
+    {
+        "XLNetLMHeadModel": {
+            "pytorch_torch_compile_inductor": {
+                "inference_s": 0.03272564172744751,
+                "training_s": 0.13295984268188477
+            },
+            "pytorch_torch_compile_eager": {
+                "inference_s": 0.05149167060852051,
+                "training_s": 0.1736732816696167
+            },
+            "pytorch_torch_compile_cudagraphs": {
+                "inference_s": 0.12713451862335204,
+                "training_s": 0.23758399724960327
+            },
+            "pytorch_torch_compile_onnxrt": {
+                "error": "Unsupported attribute type '<class 'torch.dtype'>' for attribute 'to' in node=%908 : Tensor = onnx::Cast(%_val_907)\n, value is torch.float32"
+            },
+            "pytorch_torch_compile_openxla": {
+                "error": "torch_xla/csrc/runtime/pjrt_registry.cc:214 : Check failed: client \n*** Begin stack trace ***\n\ttsl::CurrentStackTrace()\n\ttorch_xla::runtime::InitializePjRt(std::string const&)\n\ttorch_xla::runtime::PjRtComputationClient::PjRtComputationClient()\n\t\n\ttorch_xla::runtime::GetComputationClient()\n\ttorch_xla::bridge::GetDefaultDevice()\n\ttorch_xla::bridge::GetCurrentDevice()\n\ttorch_xla::bridge::GetCurrentAtenDevice()\n\t\n\t\n\t\n\t_PyObject_MakeTpCall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\tTHPFunction_apply(_object*, _object*)\n\t\n\tPyObject_Call\n\t_PyEval_EvalFrameDefault\n\t\n\t\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\t\n\t\n\tPyObject_Call\n\t_PyEval_EvalFrameDefault\n\t\n\t\n\tPyObject_Call\n\t_PyEval_EvalFrameDefault\n\t\n\t\n\tPyObject_Call\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\tPyObject_Call\n\t_PyEval_EvalFrameDefault\n\t\n\t\n\tPyObject_Call\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyObject_FastCallDictTstate\n\t_PyObject_Call_Prepend\n\t\n\tPyObject_Call\n\t_PyEval_EvalFrameDefault\n\t\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t_PyFunction_Vectorcall\n\t_PyEval_EvalFrameDefault\n\t\n\tPyEval_EvalCode\n\t\n\t\n\t\n\t_PyRun_SimpleFileObject\n\t_PyRun_AnyFileObject\n\tPy_RunMain\n\tPy_BytesMain\n\t__libc_start_main\n\t\n*** End stack trace ***\nUnknown PJRT_DEVICE 'CUDA'"
+            },
+            "pytorch_torch_compile_tvm": {
+                "inference_s": 0.0585669207572937,
+                "training_s": 0.17586587190628053
+            },
+            "jax_flax_xla": {
+                "error": "Unrecognized configuration class <class 'transformers.models.xlnet.configuration_xlnet.XLNetConfig'> for this kind of AutoModel: FlaxAutoModel.\nModel type should be one of AlbertConfig, BartConfig, BeitConfig, BertConfig, BigBirdConfig, BlenderbotConfig, BlenderbotSmallConfig, BloomConfig, CLIPConfig, Dinov2Config, DistilBertConfig, ElectraConfig, GemmaConfig, GPT2Config, GPT2Config, GPTNeoConfig, GPTJConfig, LlamaConfig, LongT5Config, MarianConfig, MBartConfig, MistralConfig, MT5Config, OPTConfig, PegasusConfig, RegNetConfig, ResNetConfig, RobertaConfig, RobertaPreLayerNormConfig, RoFormerConfig, T5Config, VisionTextDualEncoderConfig, ViTConfig, Wav2Vec2Config, WhisperConfig, XGLMConfig, XLMRobertaConfig."
+            }
+        }
+    },
+    {
+        "YituTechConvBert": {
+            "pytorch_torch_compile_onnxrt": {
+                "inference_s": 0.05654417991638184,
+                "training_s": 0.3789751434326172
+            },
+            "jax_flax_xla": {
+                "error": "Unrecognized configuration class <class 'transformers.models.convbert.configuration_convbert.ConvBertConfig'> for this kind of AutoModel: FlaxAutoModel.\nModel type should be one of AlbertConfig, BartConfig, BeitConfig, BertConfig, BigBirdConfig, BlenderbotConfig, BlenderbotSmallConfig, BloomConfig, CLIPConfig, Dinov2Config, DistilBertConfig, ElectraConfig, GemmaConfig, GPT2Config, GPT2Config, GPTNeoConfig, GPTJConfig, LlamaConfig, LongT5Config, MarianConfig, MBartConfig, MistralConfig, MT5Config, OPTConfig, PegasusConfig, RegNetConfig, ResNetConfig, RobertaConfig, RobertaPreLayerNormConfig, RoFormerConfig, T5Config, VisionTextDualEncoderConfig, ViTConfig, Wav2Vec2Config, WhisperConfig, XGLMConfig, XLMRobertaConfig."
+            }
+        }
+    }
+]
