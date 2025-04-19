@@ -1,0 +1,15 @@
+{
+  "bert-base-uncased": {
+    "class": "AutoModel",
+    "pretrained_model": "bert-base-uncased"
+  },
+  "roberta-base": { "class": "AutoModel", "pretrained_model": "roberta-base" },
+  "distilbert-base-uncased": {
+    "class": "AutoModel",
+    "pretrained_model": "distilbert-base-uncased"
+  },
+  "deberta-v3-small": {
+    "class": "AutoModel",
+    "pretrained_model": "microsoft/deberta-v3-small"
+  }
+}

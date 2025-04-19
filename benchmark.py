@@ -186,18 +186,31 @@ def benchmark_training_flax(model, inputs, num_iters=100):
     end = time.time()
     return (end - start) / num_iters
 
+def benchmark_across_iterations(model, inputs, backend="inductor", iteration_range=[1, 2, 5, 10, 25, 50, 100]):
+    results = []
+    try:
+        compiled = torch.compile(model, backend=backend)
+    except Exception as e:
+        return [{"iterations": i, "error": str(e)} for i in iteration_range]
+
+    for n in iteration_range:
+        try:
+            inf_time = benchmark_inference_torch_compile(compiled, inputs, num_iters=n)
+            results.append({"iterations": n, "avg_inference_time_s": inf_time})
+        except Exception as e:
+            results.append({"iterations": n, "error": str(e)})
+    return results
+
+
 def run_benchmarks(mapping_path):
     with open(mapping_path, "r") as f:
         mapping = json.load(f)
 
     all_results = {}
 
-    # Wrap the model loop in tqdm
-    for original_name, spec in tqdm(mapping.items(),
-                                    desc="Models",
-                                    unit="model"):
+    for original_name, spec in tqdm(mapping.items(), desc="Models", unit="model"):
         class_name = spec["class"]
-        model_id   = spec["pretrained_model"]
+        model_id = spec["pretrained_model"]
         all_results[original_name] = {}
 
         tmp_cache = tempfile.mkdtemp()
@@ -206,25 +219,20 @@ def run_benchmarks(mapping_path):
                 try:
                     tokenizer = AutoTokenizer.from_pretrained(model_id, cache_dir=tmp_cache)
                 except ValueError:
-                    # fall back to slow
                     tokenizer = AutoTokenizer.from_pretrained(
-                        model_id,
-                        cache_dir=tmp_cache,
-                        use_fast=False
+                        model_id, cache_dir=tmp_cache, use_fast=False
                     )
                 dummy_inputs = get_dummy_inputs(tokenizer)
 
                 ModelClass = getattr(transformers, class_name, None) or AutoModel
-                pt_model   = ModelClass.from_pretrained(model_id, cache_dir=tmp_cache).eval()
+                pt_model = ModelClass.from_pretrained(model_id, cache_dir=tmp_cache).eval()
 
                 if getattr(pt_model.config, "is_encoder_decoder", False):
-                    # pick the right shift function
                     if pt_model.config.model_type == "t5":
                         from transformers.models.t5.modeling_t5 import shift_tokens_right
                     else:
                         from transformers.models.bart.modeling_bart import shift_tokens_right
 
-                    # build decoder_input_ids from the encoder dummy input_ids
                     decoder_input_ids = shift_tokens_right(
                         dummy_inputs["input_ids"],
                         pt_model.config.pad_token_id,
@@ -232,52 +240,38 @@ def run_benchmarks(mapping_path):
                     )
                     dummy_inputs["decoder_input_ids"] = decoder_input_ids
 
-                backends = ["inductor", "eager", "cudagraphs", "onnxrt", "openxla", "tvm"]
-                # backends = ["onnxrt"]
-                # Wrap the backend loop in tqdm, too
-                for backend in tqdm(backends,
-                                    desc=f"{original_name[:15]}… backends",
-                                    leave=False,
-                                    unit="backend"):
-                    key = f"pytorch_torch_compile_{backend}"
+                # Optional: Benchmark eager mode across iterations
+                eager_results = []
+                for n in [1, 2, 5, 10, 25, 50, 100]:
                     try:
-                        compiled = torch.compile(pt_model, backend=backend)
-                        inf_t    = benchmark_inference_torch_compile(compiled, dummy_inputs)
-                        train_t  = benchmark_training_torch_compile(compiled, dummy_inputs)
-                        all_results[original_name][key] = {
-                            "inference_s": inf_t,
-                            "training_s":  train_t
-                        }
+                        t = benchmark_inference_torch_compile(pt_model, dummy_inputs, num_iters=n)
+                        eager_results.append({"iterations": n, "avg_inference_time_s": t})
                     except Exception as e:
-                        all_results[original_name][key] = {"error": str(e)}
+                        eager_results.append({"iterations": n, "error": str(e)})
+                all_results[original_name]["eager"] = eager_results
 
-                # # JAX/Flax
-                # try:
-                #     flax_model = FlaxAutoModel.from_pretrained(model_id,
-                #                                             cache_dir=tmp_cache)
-                #     inf_f = benchmark_inference_flax(flax_model, dummy_inputs)
-                #     train_f = benchmark_training_flax(flax_model, dummy_inputs)
-                #     all_results[original_name]["jax_flax_xla"] = {
-                #         "inference_s": inf_f,
-                #         "training_s":  train_f
-                #     }
-                # except Exception as e:
-                #     all_results[original_name]["jax_flax_xla"] = {"error": str(e)}
+                # Backends to benchmark with torch.compile
+                backends = ["inductor", "cudagraphs", "onnxrt", "openxla", "tvm"]
+                for backend in tqdm(backends, desc=f"{original_name[:15]}… backends", leave=False, unit="backend"):
+                    key = f"benchmark_iterations_{backend}"
+                    results = benchmark_across_iterations(pt_model, dummy_inputs, backend=backend)
+                    all_results[original_name][key] = results
 
-                append_results({original_name: all_results[original_name]})
+                append_results({original_name: all_results[original_name]},
+                               output_file="benchmark_iterations.json")
             except Exception as e:
-                # Record the failure for this model, then continue
                 all_results[original_name] = {"error": repr(e)}
-                append_results({original_name: all_results[original_name]})
-
+                append_results({original_name: all_results[original_name]},
+                               output_file="benchmark_iterations.json")
         finally:
             shutil.rmtree(tmp_cache)
 
     return all_results
 
 
+
 if __name__ == "__main__":
-    json_path = "sentencepiece_models.json"  # Your JSON file containing model definitions
+    json_path = "iteration_models.json"  # Your JSON file containing model definitions
     bench_results = run_benchmarks(json_path)
     print("Benchmarking complete. Results:")
     print(bench_results)
