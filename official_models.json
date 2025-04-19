@@ -1,0 +1,182 @@
+{
+    "AlbertForMaskedLM": {
+      "class": "AlbertForMaskedLM",
+      "pretrained_model": "albert-base-v2"
+    },
+    "AlbertForQuestionAnswering": {
+      "class": "AlbertForQuestionAnswering",
+      "pretrained_model": "albert-base-v2"
+    },
+    "AllenaiLongformerBase": {
+      "class": "LongformerForMaskedLM",
+      "pretrained_model": "allenai/longformer-base-4096"
+    },
+    "BartForCausalLM": {
+      "class": "BartForCausalLM",
+      "pretrained_model": "facebook/bart-large"
+    },
+    "BartForConditionalGeneration": {
+      "class": "BartForConditionalGeneration",
+      "pretrained_model": "facebook/bart-large-cnn"
+    },
+    "BertForMaskedLM": {
+      "class": "BertForMaskedLM",
+      "pretrained_model": "bert-base-uncased"
+    },
+    "BertForQuestionAnswering": {
+      "class": "BertForQuestionAnswering",
+      "pretrained_model": "bert-base-uncased"
+    },
+    "BigBird": {
+      "class": "BigBirdForMaskedLM",
+      "pretrained_model": "google/bigbird-base-trivia-itc"
+    },
+    "BlenderbotForCausalLM": {
+      "class": "BlenderbotForCausalLM",
+      "pretrained_model": "facebook/blenderbot-400M-distill"
+    },
+    "BlenderbotSmallForCausalLM": {
+      "class": "BlenderbotSmallForCausalLM",
+      "pretrained_model": "facebook/blenderbot_small-90M"
+    },
+    "BlenderbotSmallForConditionalGeneration": {
+      "class": "BlenderbotSmallForConditionalGeneration",
+      "pretrained_model": "facebook/blenderbot_small-90M"
+    },
+    "CamemBert": {
+      "class": "CamemBertForMaskedLM",
+      "pretrained_model": "camembert/camembert-base"
+    },
+    "DebertaForMaskedLM": {
+      "class": "DebertaForMaskedLM",
+      "pretrained_model": "microsoft/deberta-base"
+    },
+    "DebertaForQuestionAnswering": {
+      "class": "DebertaForQuestionAnswering",
+      "pretrained_model": "microsoft/deberta-base"
+    },
+    "DebertaV2ForMaskedLM": {
+      "class": "DebertaV2ForMaskedLM",
+      "pretrained_model": "microsoft/deberta-v2-xlarge"
+    },
+    "DebertaV2ForQuestionAnswering": {
+      "class": "DebertaV2ForQuestionAnswering",
+      "pretrained_model": "microsoft/deberta-v2-xlarge"
+    },
+    "DistilBertForMaskedLM": {
+      "class": "DistilBertForMaskedLM",
+      "pretrained_model": "distilbert-base-uncased"
+    },
+    "DistilBertForQuestionAnswering": {
+      "class": "DistilBertForQuestionAnswering",
+      "pretrained_model": "distilbert-base-uncased"
+    },
+    "DistillGPT2": {
+      "class": "DistilGPT2LMHeadModel",
+      "pretrained_model": "distilgpt2"
+    },
+    "ElectraForCausalLM": {
+      "class": "AutoModelForCausalLM",
+      "pretrained_model": "google/electra-small-generator"
+    },
+    "ElectraForQuestionAnswering": {
+      "class": "ElectraForQuestionAnswering",
+      "pretrained_model": "google/electra-small-discriminator"
+    },
+    "GoogleFnet": {
+      "class": "FNetForMaskedLM",
+      "pretrained_model": "google/fnet-base"
+    },
+    "GPT2ForSequenceClassification": {
+      "class": "GPT2ForSequenceClassification",
+      "pretrained_model": "gpt2"
+    },
+    "LayoutLMForMaskedLM": {
+      "class": "LayoutLMForMaskedLM",
+      "pretrained_model": "microsoft/layoutlm-base-uncased"
+    },
+    "LayoutLMForSequenceClassification": {
+      "class": "LayoutLMForSequenceClassification",
+      "pretrained_model": "microsoft/layoutlm-base-uncased"
+    },
+    "M2M100ForConditionalGeneration": {
+      "class": "M2M100ForConditionalGeneration",
+      "pretrained_model": "facebook/m2m100_418M"
+    },
+    "MBartForConditionalGeneration": {
+      "class": "MBartForConditionalGeneration",
+      "pretrained_model": "facebook/mbart-large-50"
+    },
+    "MegatronBertForCausalLM": {
+      "class": "MegatronBertForCausalLM",
+      "pretrained_model": "nvidia/megatron-bert-uncased-345m"
+    },
+    "MegatronBertForQuestionAnswering": {
+      "class": "MegatronBertForQuestionAnswering",
+      "pretrained_model": "nvidia/megatron-bert-uncased-345m"
+    },
+    "MobileBertForMaskedLM": {
+      "class": "MobileBertForMaskedLM",
+      "pretrained_model": "google/mobilebert-uncased"
+    },
+    "MobileBertForQuestionAnswering": {
+      "class": "MobileBertForQuestionAnswering",
+      "pretrained_model": "google/mobilebert-uncased"
+    },
+    "MT5ForConditionalGeneration": {
+      "class": "MT5ForConditionalGeneration",
+      "pretrained_model": "google/mt5-base"
+    },
+    "OPTForCausalLM": {
+      "class": "OPTForCausalLM",
+      "pretrained_model": "facebook/opt-125m"
+    },
+    "PegasusForCausalLM": {
+      "class": "PegasusForCausalLM",
+      "pretrained_model": "google/pegasus-large"
+    },
+    "PegasusForConditionalGeneration": {
+      "class": "PegasusForConditionalGeneration",
+      "pretrained_model": "google/pegasus-large"
+    },
+    "PLBartForConditionalGeneration": {
+      "class": "PLBartForConditionalGeneration",
+      "pretrained_model": "uclanlp/plbart-base"
+    },
+    "RobertaForCausalLM": {
+      "class": "RobertaForCausalLM",
+      "pretrained_model": "roberta-base"
+    },
+    "RobertaForQuestionAnswering": {
+      "class": "RobertaForQuestionAnswering",
+      "pretrained_model": "roberta-base"
+    },
+    "Speech2Text2ForCausalLM": {
+      "class": "Speech2Text2ForCausalLM",
+      "pretrained_model": "facebook/s2t-small-librispeech-asr"
+    },
+    "T5ForConditionalGeneration": {
+      "class": "T5ForConditionalGeneration",
+      "pretrained_model": "t5-base"
+    },
+    "T5Small": {
+      "class": "T5ForConditionalGeneration",
+      "pretrained_model": "t5-small"
+    },
+    "TrOCRForCausalLM": {
+      "class": "VisionEncoderDecoderModel",
+      "pretrained_model": "microsoft/trocr-base-handwritten"
+    },
+    "XGLMForCausalLM": {
+      "class": "XGLMForCausalLM",
+      "pretrained_model": "facebook/xglm-564M"
+    },
+    "XLNetLMHeadModel": {
+      "class": "XLNetLMHeadModel",
+      "pretrained_model": "xlnet-base-cased"
+    },
+    "YituTechConvBert": {
+      "class": "ConvBertForMaskedLM",
+      "pretrained_model": "YituTech/conv-bert-small"
+    }
+  }

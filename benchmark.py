@@ -3,16 +3,31 @@ import json
 import time
 import torch
 from transformers import AutoModel, AutoTokenizer, FlaxAutoModel
+import transformers
+import shutil
+import tempfile
 import torch_xla.core.xla_model as xm  # for PyTorch XLA
 import jax
 import jax.numpy as jnp
+from tqdm.auto import tqdm     # pip install tqdm
+
+# from torch._subclasses.fake_tensor import FakeTensorMode
+# import torch._dynamo as dynamo
+# print("suppress_errors:", dynamo.config.suppress_errors)
+# fake_mode = FakeTensorMode(allow_non_fake_inputs=True)
+# print("allow_non_fake_inputs (class):", FakeTensorMode.allow_non_fake_inputs)
+# Create a mode that will auto‑convert real Tensors/scalars to FakeTensors
 
 # Run beforehand:
 # export GPU_NUM_DEVICES=1
 # export XLA_USE_CUDA=1
 # export PJRT_DEVICE=cuda
+# export LD_LIBRARY_PATH=/opt/conda/envs/xla-env/lib:$LD_LIBRARY_PATH
 
-def append_results(new_results, output_file="bench_results.json"):
+# export TORCH_LOGS="+dynamo,+inductor"
+# export TORCHDYNAMO_VERBOSE=1
+
+def append_results(new_results, output_file="paper_model_results_sentencepiece.json"):
     # Check if the file exists and load its data, else start with an empty list.
     if os.path.exists(output_file):
         try:
@@ -171,64 +186,98 @@ def benchmark_training_flax(model, inputs, num_iters=100):
     end = time.time()
     return (end - start) / num_iters
 
-# Main function that reads a JSON file of models and benchmarks them
-def run_benchmarks(json_path):
-    with open(json_path, "r") as f:
-        config = json.load(f)
-    
-    results = {}
-    
-    for model_entry in config["models"]:
-        model_name = model_entry["name"]
-        print(f"Benchmarking {model_name}...")
-        results[model_name] = {}
+def run_benchmarks(mapping_path):
+    with open(mapping_path, "r") as f:
+        mapping = json.load(f)
 
-        # Create tokenizer and dummy input for PyTorch (will also be reused for Flax)
-        tokenizer = AutoTokenizer.from_pretrained(model_name)
-        dummy_inputs = get_dummy_inputs(tokenizer)
-        
-        # --- PyTorch with torch.compile ---
-        backends = torch._dynamo.list_backends()
-        print("Available backends:", backends)
-        backends = ["inductor", "eager", 'cudagraphs', 'onnxrt', 'openxla', 'tvm']
-        for backend in backends:
-            model_pt = AutoModel.from_pretrained(model_name)
-            model_pt.eval()
-            compiled_model = torch.compile(model_pt, backend=backend)
-            inf_time = benchmark_inference_torch_compile(compiled_model, dummy_inputs)
-            train_time = benchmark_training_torch_compile(compiled_model, dummy_inputs)
-            results[model_name][f"pytorch_torch_compile_{backend}"] = {"inference_time": inf_time,
-                                                            "training_time": train_time}
-        
-        # # --- PyTorch with XLA ---
-        # # Note: Ensure you have an XLA-supported device (e.g. TPU or a GPU configured with torch_xla)
-        # device = xm.xla_device()
-        # attr = attr.to(torch.device(device))
-        # model_xla = AutoModel.from_pretrained(model_name).to(device)
-        # model_xla.eval()
-        # dummy_inputs_xla = get_dummy_inputs(tokenizer, device=device)
-        # inf_time_xla = benchmark_inference_torch_xla(model_xla, dummy_inputs_xla)
-        # train_time_xla = benchmark_training_torch_xla(model_xla, dummy_inputs_xla)
-        # results[model_name]["pytorch_xla"] = {"inference_time": inf_time_xla,
-        #                                       "training_time": train_time_xla}
+    all_results = {}
 
+    # Wrap the model loop in tqdm
+    for original_name, spec in tqdm(mapping.items(),
+                                    desc="Models",
+                                    unit="model"):
+        class_name = spec["class"]
+        model_id   = spec["pretrained_model"]
+        all_results[original_name] = {}
 
-        
-        # --- JAX/Flax with XLA ---
-        model_flax = FlaxAutoModel.from_pretrained(model_name)
-        inf_time_flax = benchmark_inference_flax(model_flax, dummy_inputs)
-        train_time_flax = benchmark_training_flax(model_flax, dummy_inputs)
-        results[model_name]["jax_flax_xla"] = {"inference_time": inf_time_flax,
-                                               "training_time": train_time_flax}
-        print(f"Results for {model_name}: {results[model_name]}")
+        tmp_cache = tempfile.mkdtemp()
+        try:
+            try:
+                try:
+                    tokenizer = AutoTokenizer.from_pretrained(model_id, cache_dir=tmp_cache)
+                except ValueError:
+                    # fall back to slow
+                    tokenizer = AutoTokenizer.from_pretrained(
+                        model_id,
+                        cache_dir=tmp_cache,
+                        use_fast=False
+                    )
+                dummy_inputs = get_dummy_inputs(tokenizer)
 
-        # Append the current model's results to the JSON file.
-        append_results({model_name: results[model_name]})
-    
-    return results
+                ModelClass = getattr(transformers, class_name, None) or AutoModel
+                pt_model   = ModelClass.from_pretrained(model_id, cache_dir=tmp_cache).eval()
+
+                if getattr(pt_model.config, "is_encoder_decoder", False):
+                    # pick the right shift function
+                    if pt_model.config.model_type == "t5":
+                        from transformers.models.t5.modeling_t5 import shift_tokens_right
+                    else:
+                        from transformers.models.bart.modeling_bart import shift_tokens_right
+
+                    # build decoder_input_ids from the encoder dummy input_ids
+                    decoder_input_ids = shift_tokens_right(
+                        dummy_inputs["input_ids"],
+                        pt_model.config.pad_token_id,
+                        pt_model.config.decoder_start_token_id
+                    )
+                    dummy_inputs["decoder_input_ids"] = decoder_input_ids
+
+                backends = ["inductor", "eager", "cudagraphs", "onnxrt", "openxla", "tvm"]
+                # backends = ["onnxrt"]
+                # Wrap the backend loop in tqdm, too
+                for backend in tqdm(backends,
+                                    desc=f"{original_name[:15]}… backends",
+                                    leave=False,
+                                    unit="backend"):
+                    key = f"pytorch_torch_compile_{backend}"
+                    try:
+                        compiled = torch.compile(pt_model, backend=backend)
+                        inf_t    = benchmark_inference_torch_compile(compiled, dummy_inputs)
+                        train_t  = benchmark_training_torch_compile(compiled, dummy_inputs)
+                        all_results[original_name][key] = {
+                            "inference_s": inf_t,
+                            "training_s":  train_t
+                        }
+                    except Exception as e:
+                        all_results[original_name][key] = {"error": str(e)}
+
+                # # JAX/Flax
+                # try:
+                #     flax_model = FlaxAutoModel.from_pretrained(model_id,
+                #                                             cache_dir=tmp_cache)
+                #     inf_f = benchmark_inference_flax(flax_model, dummy_inputs)
+                #     train_f = benchmark_training_flax(flax_model, dummy_inputs)
+                #     all_results[original_name]["jax_flax_xla"] = {
+                #         "inference_s": inf_f,
+                #         "training_s":  train_f
+                #     }
+                # except Exception as e:
+                #     all_results[original_name]["jax_flax_xla"] = {"error": str(e)}
+
+                append_results({original_name: all_results[original_name]})
+            except Exception as e:
+                # Record the failure for this model, then continue
+                all_results[original_name] = {"error": repr(e)}
+                append_results({original_name: all_results[original_name]})
+
+        finally:
+            shutil.rmtree(tmp_cache)
+
+    return all_results
+
 
 if __name__ == "__main__":
-    json_path = "models.json"  # Your JSON file containing model definitions
+    json_path = "sentencepiece_models.json"  # Your JSON file containing model definitions
     bench_results = run_benchmarks(json_path)
     print("Benchmarking complete. Results:")
     print(bench_results)
