@@ -189,16 +189,77 @@ def benchmark_training_flax(model, inputs, num_iters=100):
 def benchmark_across_iterations(model, inputs, backend="inductor", iteration_range=[1, 2, 5, 10, 25, 50, 100]):
     results = []
     try:
+        compile_start = time.time()
         compiled = torch.compile(model, backend=backend)
+        compile_end = time.time()
+        compile_time = compile_end - compile_start
     except Exception as e:
         return [{"iterations": i, "error": str(e)} for i in iteration_range]
 
-    for n in iteration_range:
-        try:
-            inf_time = benchmark_inference_torch_compile(compiled, inputs, num_iters=n)
-            results.append({"iterations": n, "avg_inference_time_s": inf_time})
-        except Exception as e:
-            results.append({"iterations": n, "error": str(e)})
+    # Run a single long inference and measure time after each iteration
+    torch.cuda.synchronize() if torch.cuda.is_available() else None
+    timestamps = []
+    try:
+        for i in range(100):
+            if i == 0:
+                start = time.time()
+            _ = compiled(**inputs)
+            torch.cuda.synchronize() if torch.cuda.is_available() else None
+            timestamps.append(time.time())
+    except Exception as e:
+        return [{"iterations": i + 1, "compile_time_s": compile_time, "error": str(e)} for i in iteration_range]
+
+    # Convert timestamps to average times per iteration count
+    for i in iteration_range:
+        if i <= len(timestamps):
+            total_inf_time = timestamps[i - 1] - start
+            avg_inf_time = total_inf_time / i
+            results.append({
+                "iterations": i,
+                "compile_time_s": compile_time,
+                "avg_inference_time_s": avg_inf_time,
+                "total_time_s": compile_time + avg_inf_time
+            })
+        else:
+            results.append({
+                "iterations": i,
+                "compile_time_s": compile_time,
+                "error": "Not enough iterations run"
+            })
+
+    return results
+
+def benchmark_eager_across_iterations(model, inputs, iteration_range=[1, 2, 5, 10, 25, 50, 100]):
+    results = []
+    model.eval()
+    torch.cuda.synchronize() if torch.cuda.is_available() else None
+    timestamps = []
+
+    try:
+        for i in range(100):
+            if i == 0:
+                start = time.time()
+            _ = model(**inputs)
+            torch.cuda.synchronize() if torch.cuda.is_available() else None
+            timestamps.append(time.time())
+    except Exception as e:
+        return [{"iterations": i + 1, "error": str(e)} for i in iteration_range]
+
+    for i in iteration_range:
+        if i <= len(timestamps):
+            total_inf_time = timestamps[i - 1] - start
+            avg_inf_time = total_inf_time / i
+            results.append({
+                "iterations": i,
+                "avg_inference_time_s": avg_inf_time,
+                "total_time_s": avg_inf_time  # no compile time in eager
+            })
+        else:
+            results.append({
+                "iterations": i,
+                "error": "Not enough iterations run"
+            })
+
     return results
 
 
@@ -240,15 +301,9 @@ def run_benchmarks(mapping_path):
                     )
                     dummy_inputs["decoder_input_ids"] = decoder_input_ids
 
-                # Optional: Benchmark eager mode across iterations
-                eager_results = []
-                for n in [1, 2, 5, 10, 25, 50, 100]:
-                    try:
-                        t = benchmark_inference_torch_compile(pt_model, dummy_inputs, num_iters=n)
-                        eager_results.append({"iterations": n, "avg_inference_time_s": t})
-                    except Exception as e:
-                        eager_results.append({"iterations": n, "error": str(e)})
+                eager_results = benchmark_eager_across_iterations(pt_model, dummy_inputs)
                 all_results[original_name]["eager"] = eager_results
+
 
                 # Backends to benchmark with torch.compile
                 backends = ["inductor", "cudagraphs", "onnxrt", "openxla", "tvm"]
