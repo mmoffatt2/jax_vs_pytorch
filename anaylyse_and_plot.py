@@ -19,6 +19,8 @@ def analyze(data):
         model_name, results = next(iter(model_block.items()))
 
         for backend, metrics in results.items():
+            if backend == 'error':
+                continue
             if not isinstance(metrics, dict) or "error" in metrics:
                 backend_failures[backend] += 1
                 model_failures[model_name] += 1
@@ -26,7 +28,7 @@ def analyze(data):
 
             inference_times[model_name][backend] = metrics.get("inference_s")
             training_times[model_name][backend] = metrics.get("training_s")
-
+    print(backend_failures.keys())
     return inference_times, training_times, backend_failures, model_failures
 
 def plot_bar_chart(data_dict, title, ylabel, filename):
@@ -98,7 +100,7 @@ def plot_failure_counts(count_dict, title, filename):
     plt.close()
 
 def main():
-    data = load_data("paper_model_results_updated4.json")  # Or your preferred file
+    data = load_data("paper_model_results_updated5.json")  # Or your preferred file
     inference_times, training_times, backend_failures, model_failures = analyze(data)
 
     plot_bar_chart(inference_times, "Inference Time per Backend", "Seconds", "inference_times.png")
