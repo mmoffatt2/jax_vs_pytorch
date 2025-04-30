@@ -2,7 +2,8 @@ import os
 import json
 import time
 import torch
-from transformers import AutoModel, AutoTokenizer, FlaxAutoModel
+import tensorflow as tf
+from transformers import AutoModel, AutoTokenizer, FlaxAutoModel, TFAutoModel, TFAutoModelForSequenceClassification
 import transformers
 import shutil
 import tempfile
@@ -27,7 +28,7 @@ from tqdm.auto import tqdm     # pip install tqdm
 # export TORCH_LOGS="+dynamo,+inductor"
 # export TORCHDYNAMO_VERBOSE=1
 
-def append_results(new_results, output_file="paper_model_results_sentencepiece.json"):
+def append_results(new_results, output_file="demo_results.json"):
     # Check if the file exists and load its data, else start with an empty list.
     if os.path.exists(output_file):
         try:
@@ -58,6 +59,48 @@ def get_dummy_inputs(tokenizer, device=None):
         inputs = {k: v.to(device) for k, v in inputs.items()}
     return inputs
 
+def benchmark_inference_flax_eager(model, inputs, num_iters=100):
+    """Run non-jitted (eager) inference benchmark for Flax model."""
+    def forward_fn(params, **batch):
+        return model(**batch, params=params, train=False)[0]
+
+    params = model.params
+    inputs_np = {k: v.cpu().numpy() for k, v in inputs.items()}
+
+    # Warm-up
+    for _ in range(10):
+        _ = forward_fn(params, **inputs_np)
+
+    start = time.time()
+    for _ in range(num_iters):
+        _ = forward_fn(params, **inputs_np)
+    end = time.time()
+
+    return (end - start) / num_iters
+
+def benchmark_training_flax_eager(model, inputs, num_iters=100):
+    def loss_fn(params, batch, dropout_rng):
+        outputs = model(**batch, params=params, train=True, dropout_rng=dropout_rng)[0]
+        dummy_target = jnp.zeros_like(outputs)
+        return jnp.mean((outputs - dummy_target) ** 2)
+
+    params = model.params
+    inputs_np = {k: v.cpu().numpy() for k, v in inputs.items()}
+    rng = jax.random.PRNGKey(0)
+
+    # Warm-up (not jitted)
+    for _ in range(10):
+        rng, dropout_rng = jax.random.split(rng)
+        loss, grads = jax.value_and_grad(loss_fn)(params, inputs_np, dropout_rng)
+
+    start = time.time()
+    for _ in range(num_iters):
+        rng, dropout_rng = jax.random.split(rng)
+        loss, grads = jax.value_and_grad(loss_fn)(params, inputs_np, dropout_rng)
+    end = time.time()
+
+    return (end - start) / num_iters
+
 # Inference benchmark for PyTorch with torch.compile
 def benchmark_inference_torch_compile(model, inputs, num_iters=100):
     # Warm-up
@@ -76,7 +119,7 @@ def benchmark_training_torch_compile(model, inputs, num_iters=100):
     model.train()
     optimizer = torch.optim.SGD(model.parameters(), lr=1e-3)
     loss_fn = torch.nn.MSELoss()
-    # Create a dummy target tensor (using model output shape as reference)
+
     with torch.no_grad():
         sample_output = model(**inputs)[0]
     dummy_target = torch.randn_like(sample_output)
@@ -138,6 +181,88 @@ def benchmark_training_torch_xla(model, inputs, num_iters=100):
     end = time.time()
     return (end - start) / num_iters
 
+def get_dummy_inputs_tf(tokenizer):
+    dummy_text = "This is a dummy input for benchmarking."
+    return tokenizer(dummy_text,
+                     return_tensors="tf",
+                     padding="max_length",
+                     truncation=True,
+                     max_length=32)
+
+def benchmark_inference_tf(model, inputs, num_iters=100):
+    # Warm‑up
+    for _ in range(10):
+        _ = model(**inputs)
+    # Timed runs
+    start = time.time()
+    for _ in range(num_iters):
+        _ = model(**inputs)
+    end = time.time()
+    return (end - start) / num_iters
+
+def benchmark_training_tf(model, inputs, num_iters=100):
+    # simple MSE training loop
+    optimizer = tf.keras.optimizers.SGD(learning_rate=1e-3)
+    loss_fn   = tf.keras.losses.MeanSquaredError()
+    # Warm‑up
+    for _ in range(10):
+        with tf.GradientTape() as tape:
+            logits = model(**inputs)[0]
+            loss   = loss_fn(tf.zeros_like(logits), logits)
+        grads = tape.gradient(loss, model.trainable_variables)
+        optimizer.apply_gradients(zip(grads, model.trainable_variables))
+    # Timed runs
+    start = time.time()
+    for _ in range(num_iters):
+        with tf.GradientTape() as tape:
+            logits = model(**inputs)[0]
+            loss   = loss_fn(tf.zeros_like(logits), logits)
+        grads = tape.gradient(loss, model.trainable_variables)
+        optimizer.apply_gradients(zip(grads, model.trainable_variables))
+    end = time.time()
+    return (end - start) / num_iters
+
+# ─── New: XLA‑compiled TF benchmarks ────────────────────────────────────────
+def benchmark_inference_tf_xla(model, inputs, num_iters=100):
+    # Wrap the forward pass in a tf.function with XLA JIT
+    @tf.function(jit_compile=True)
+    def fwd(inp):
+        return model(**inp)[0]
+
+    # Warm‑up
+    for _ in range(10):
+        _ = fwd(inputs)
+    # Timed runs
+    start = time.time()
+    for _ in range(num_iters):
+        _ = fwd(inputs)
+    end = time.time()
+    return (end - start) / num_iters
+
+def benchmark_training_tf_xla(model, inputs, num_iters=100):
+    optimizer = tf.keras.optimizers.SGD(learning_rate=1e-3)
+    loss_fn   = tf.keras.losses.MeanSquaredError()
+
+    # Wrap the training step in a tf.function with XLA JIT
+    @tf.function(jit_compile=True)
+    def train_step(inp):
+        with tf.GradientTape() as tape:
+            logits = model(**inp)[0]
+            loss   = loss_fn(tf.zeros_like(logits), logits)
+        grads = tape.gradient(loss, model.trainable_variables)
+        optimizer.apply_gradients(zip(grads, model.trainable_variables))
+        return loss
+
+    # Warm‑up
+    for _ in range(10):
+        _ = train_step(inputs)
+    # Timed runs
+    start = time.time()
+    for _ in range(num_iters):
+        _ = train_step(inputs)
+    end = time.time()
+    return (end - start) / num_iters
+
 # Inference benchmark for JAX/Flax (XLA compiled via jax.jit)
 def benchmark_inference_flax(model, inputs, num_iters=100):
     # Define a simple forward function; Flax models use __call__
@@ -192,12 +317,12 @@ def run_benchmarks(mapping_path):
 
     all_results = {}
 
-    # Wrap the model loop in tqdm
     for original_name, spec in tqdm(mapping.items(),
                                     desc="Models",
                                     unit="model"):
         class_name = spec["class"]
         model_id   = spec["pretrained_model"]
+
         all_results[original_name] = {}
 
         tmp_cache = tempfile.mkdtemp()
@@ -215,26 +340,20 @@ def run_benchmarks(mapping_path):
                 dummy_inputs = get_dummy_inputs(tokenizer)
 
                 ModelClass = getattr(transformers, class_name, None) or AutoModel
-                pt_model   = ModelClass.from_pretrained(model_id, cache_dir=tmp_cache).eval()
+                if model_id == "nvidia/megatron-bert-uncased-345m":
+                    directory = os.path.join(os.environ['MYDIR'], 'nvidia/megatron-bert-uncased-345m')
+                    pt_model = ModelClass.from_pretrained(directory, cache_dir=tmp_cache).eval()
+                elif model_id == "facebook/opt-125m":
+                    pt_model = ModelClass.from_pretrained(model_id, cache_dir=tmp_cache, from_tf=True).eval()
+                else:
+                    pt_model = ModelClass.from_pretrained(model_id, cache_dir=tmp_cache).eval()
 
                 if getattr(pt_model.config, "is_encoder_decoder", False):
-                    # pick the right shift function
-                    if pt_model.config.model_type == "t5":
-                        from transformers.models.t5.modeling_t5 import shift_tokens_right
-                    else:
-                        from transformers.models.bart.modeling_bart import shift_tokens_right
-
-                    # build decoder_input_ids from the encoder dummy input_ids
-                    decoder_input_ids = shift_tokens_right(
-                        dummy_inputs["input_ids"],
-                        pt_model.config.pad_token_id,
-                        pt_model.config.decoder_start_token_id
-                    )
+                    # use T5's built‑in shift helper
+                    decoder_input_ids = pt_model._shift_right(dummy_inputs["input_ids"])
                     dummy_inputs["decoder_input_ids"] = decoder_input_ids
 
                 backends = ["inductor", "eager", "cudagraphs", "onnxrt", "openxla", "tvm"]
-                # backends = ["onnxrt"]
-                # Wrap the backend loop in tqdm, too
                 for backend in tqdm(backends,
                                     desc=f"{original_name[:15]}… backends",
                                     leave=False,
@@ -251,24 +370,64 @@ def run_benchmarks(mapping_path):
                     except Exception as e:
                         all_results[original_name][key] = {"error": str(e)}
 
-                # # JAX/Flax
-                # try:
-                #     flax_model = FlaxAutoModel.from_pretrained(model_id,
-                #                                             cache_dir=tmp_cache)
-                #     inf_f = benchmark_inference_flax(flax_model, dummy_inputs)
-                #     train_f = benchmark_training_flax(flax_model, dummy_inputs)
-                #     all_results[original_name]["jax_flax_xla"] = {
-                #         "inference_s": inf_f,
-                #         "training_s":  train_f
-                #     }
-                # except Exception as e:
-                #     all_results[original_name]["jax_flax_xla"] = {"error": str(e)}
+                try:
+                    flax_cls_name = "Flax" + class_name
+                    flax_cls = getattr(transformers, flax_cls_name, None) or FlaxAutoModel
+                    flax_model = flax_cls.from_pretrained(model_id, cache_dir=tmp_cache)
 
-                append_results({original_name: all_results[original_name]})
+                    inf_f_jit   = benchmark_inference_flax(flax_model, dummy_inputs)
+                    train_f_jit = benchmark_training_flax(flax_model, dummy_inputs)
+
+                    inf_f_eager   = benchmark_inference_flax_eager(flax_model, dummy_inputs)
+                    train_f_eager = benchmark_training_flax_eager(flax_model, dummy_inputs)
+
+                    all_results[original_name]["jax_flax_xla"] = {
+                        "inference_s": inf_f_jit,
+                        "training_s":  train_f_jit
+                    }
+                    all_results[original_name]["jax_flax_eager"] = {
+                        "inference_s": inf_f_eager,
+                        "training_s":  train_f_eager
+                    }
+                except Exception as e:
+                    all_results[original_name]["jax_flax_xla"] = {"error": str(e)}
+
+
+                # ─── TensorFlow eager benchmark ───
+                try:
+                    tf_cls_name = "TF" + class_name
+                    tf_cls = getattr(transformers, tf_cls_name, None) or TFAutoModel
+                    tf_model = tf_cls.from_pretrained(model_id, cache_dir=tmp_cache)
+                    
+                    dummy_tf = get_dummy_inputs_tf(tokenizer)
+                    inf_tf   = benchmark_inference_tf(tf_model, dummy_tf)
+                    train_tf = benchmark_training_tf(tf_model, dummy_tf)
+                    all_results[original_name]["tensorflow_eager"] = {
+                        "inference_s": inf_tf,
+                        "training_s":  train_tf
+                    }
+                except Exception as e:
+                    all_results[original_name]["tensorflow_eager"] = {"error": str(e)}
+
+                # ─── TensorFlow XLA benchmark ───
+                try:
+                    tf_cls_name = "TF" + class_name
+                    tf_cls = getattr(transformers, tf_cls_name, None) or TFAutoModel
+                    tf_model = tf_cls.from_pretrained(model_id, cache_dir=tmp_cache)
+                    
+                    dummy_tf = get_dummy_inputs_tf(tokenizer)
+                    inf_tf_xla   = benchmark_inference_tf_xla(tf_model, dummy_tf)
+                    train_tf_xla = benchmark_training_tf_xla(tf_model, dummy_tf)
+                    all_results[original_name]["tensorflow_xla"] = {
+                        "inference_s": inf_tf_xla,
+                        "training_s":  train_tf_xla
+                    }
+                except Exception as e:
+                    all_results[original_name]["tensorflow_xla"] = {"error": str(e)}
+
             except Exception as e:
-                # Record the failure for this model, then continue
                 all_results[original_name] = {"error": repr(e)}
-                append_results({original_name: all_results[original_name]})
+            append_results({original_name: all_results[original_name]})
 
         finally:
             shutil.rmtree(tmp_cache)
@@ -277,7 +436,7 @@ def run_benchmarks(mapping_path):
 
 
 if __name__ == "__main__":
-    json_path = "sentencepiece_models.json"  # Your JSON file containing model definitions
+    json_path = "demo_model.json"
     bench_results = run_benchmarks(json_path)
     print("Benchmarking complete. Results:")
     print(bench_results)
